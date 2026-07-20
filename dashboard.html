@@ -59,7 +59,41 @@ header{display:flex;justify-content:space-between;align-items:center;padding:14p
 
 <div class="container">
 <div class="filters">
-<button>Yesterday</button><button>Last Week</button><button>Last Month</button><button>Custom Date</button>
+
+    <button class="filter-btn active"
+            onclick="changeData('yesterday',this)">
+        Yesterday
+    </button>
+
+    <button class="filter-btn"
+            onclick="changeData('week',this)">
+        Last Week
+    </button>
+
+    <button class="filter-btn"
+            onclick="changeData('month',this)">
+        Last Month
+    </button>
+
+    <button class="filter-btn"
+            onclick="showCalendar(this)">
+        Custom Date Range
+    </button>
+
+</div>
+
+
+<div id="customRange">
+
+    <input type="date" id="start">
+
+    <input type="date" id="end">
+
+    <button class="apply"
+            onclick="applyCustom()">
+        Apply
+    </button>
+
 </div>
 
 <div class="grid">
