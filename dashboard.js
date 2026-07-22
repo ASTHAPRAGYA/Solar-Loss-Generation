@@ -1,16 +1,22 @@
 // ==========================
 // Dashboard dashboardData (Demo)
-window.onload=function(){
+window.onload = function () {
 
-if(localStorage.getItem("theme")=="dark"){
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+    }
 
-document.body.classList.add("dark-mode");
+    const savedFilter = localStorage.getItem("filter");
 
-}
+    if (savedFilter && dashboardData[savedFilter]) {
+        updateDashboard(dashboardData[savedFilter]);
+    } else {
+        updateDashboard(dashboardData.yesterday);
+    }
 
 };
 // ==========================
-const dashboarddashboardData = {
+const dashboardData = {
 
     yesterday:{
 
@@ -119,7 +125,7 @@ function animateValue(id, value) {
 // ==========================
 // Update Dashboard
 // ==========================
-function updateDashboard(d) {
+function updateDashboard(d){
 
     animateValue("expected", d.expected);
     animateValue("actual", d.actual);
@@ -127,12 +133,32 @@ function updateDashboard(d) {
     animateValue("pr", d.pr);
     animateValue("health", d.health);
 
+    if(d.weather){
+        updateWeather(d.weather);
+    }
+
+    if(d.highestLoss){
+        updatePlantFlow(d.highestLoss);
+    }
+
+    if(d.chart){
+        updateGenerationChart(d.chart);
+    }
+
 }
 
 // ==========================
 // Yesterday
 // ==========================
-document.getElementById("btnYesterday")
+document.addEventListener("DOMContentLoaded", function(){
+
+    // Yesterday button
+    // Week button
+    // Month button
+    // Custom button
+    // Apply button
+
+});
 .addEventListener("click", function () {
 
     setActive(this);
@@ -140,6 +166,7 @@ document.getElementById("btnYesterday")
     document.getElementById("customRange").style.display = "none";
 
     updateDashboard(dashboardData.yesterday);
+    localStorage.setItem("filter","yesterday");
 
 });
 
@@ -154,6 +181,7 @@ document.getElementById("btnWeek")
     document.getElementById("customRange").style.display = "none";
 
     updateDashboard(dashboardData.week);
+    localStorage.setItem("filter","Last Week");
 
 });
 
@@ -168,6 +196,7 @@ document.getElementById("btnMonth")
     document.getElementById("customRange").style.display = "none";
 
     updateDashboard(dashboardData.month);
+    localStorage.setItem("filter","Last Month");
 
 });
 
@@ -194,7 +223,13 @@ document.getElementById("applyRange")
 
     if (start === "" || end === "") {
 
-        alert("Please select both dates.");
+      const error=document.getElementById("dateError");
+
+if(error){
+
+    error.innerHTML="⚠ Please select both dates.";
+
+}
 
         return;
 
