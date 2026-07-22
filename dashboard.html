@@ -1,156 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Solar Generation Loss Optimizer - Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-body{margin:0;font-family:Poppins,sans-serif;background:#f4f8f9}
-header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:#27A5AD;color:#fff;position:sticky;top:0}
-.logo{display:flex;align-items:center;gap:12px}
-.menu{font-size:26px;cursor:pointer}
-.sidebar{position:fixed;left:0;top:0;width:260px;height:100%;background:#fff;box-shadow:2px 0 12px rgba(0,0,0,.15);padding:70px 20px;display:none}
-.sidebar a{display:block;padding:12px;color:#333;text-decoration:none;border-radius:8px}
-.sidebar a:hover{background:#27A5AD;color:#fff}
-.container{padding:20px}
-.filters button{margin:5px;padding:10px 16px;border:none;border-radius:20px;background:#27A5AD;color:#fff}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:20px 0}
-.card{background:#fff;padding:18px;border-radius:14px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
-.card h3{margin:0;color:#27A5AD;font-size:16px}
-.value{font-size:30px;font-weight:600;margin-top:10px}
-.twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.chart,.flow{background:#fff;border-radius:14px;padding:18px;box-shadow:0 3px 10px rgba(0,0,0,.08);margin-top:18px}
-.flowline{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:20px}
-.node{padding:10px 16px;border-radius:10px;background:#27A5AD;color:#fff}
-.arrow{font-size:22px;color:#27A5AD}
-.bad{background:#d32f2f}
-.notify{position:absolute;right:18px;top:58px;background:#fff;width:320px;display:none;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.2);padding:12px}
-.note{padding:10px;border-bottom:1px solid #ddd}
-.high{background:#ffe5e5}
-</style>
-</head>
-<body>
-<div class="sidebar" id="side">
-<a href="#">Home</a>
-<a href="#">Live Plant</a>
-<a href="#">Equipment Health</a>
-<a href="#">Predictive Maintenance</a>
-<a href="#">Cleaning Optimization</a>
-<a href="#">Curtailment Analysis</a>
-<a href="#">ROW Monitoring</a>
-<a href="#">Logout</a>
-</div>
 
-<header>
-<div class="logo"><span class="menu" onclick="toggleMenu()">☰</span><h2>Solar Generation Loss Optimizer</h2></div>
-<div>
-<span onclick="toggleNotify()" style="cursor:pointer">🔔</span>
-<span style="margin-left:15px">👤 Administrator</span>
-<span style="margin-left:15px">🌙</span>
-</div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Solar Generation Loss Optimizer</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="topbar">
+
+    <div class="left-section">
+
+        <button id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <h2>Solar Generation Loss Optimizer</h2>
+
+    </div>
+
+    <div class="right-section">
+
+        <div class="profile">
+
+            <button id="profileBtn">
+
+                Welcome Administrator
+
+                <i class="fas fa-chevron-down"></i>
+
+            </button>
+
+            <div class="profile-menu" id="profileMenu">
+
+                <a href="#">Visit Profile</a>
+
+                <a href="index.html">Logout</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </header>
 
-<div class="notify" id="notify">
-<div class="note high"><b>HIGH PRIORITY</b><br>HO: Curtail 15 MW from 10:30–10:45 (Unread)</div>
-<div class="note">Weather upload due in 10 minutes.</div>
-<div class="note">Koppal Wind forecast updated.</div>
-</div>
+<!-- ================= SIDEBAR ================= -->
 
-<div class="container">
-<div class="filters">
+<nav id="sidebar">
 
-    <button class="filter-btn active"
-            onclick="changeData('yesterday',this)">
-        Yesterday
-    </button>
+    <h3>MENU</h3>
 
-    <button class="filter-btn"
-            onclick="changeData('week',this)">
-        Last Week
-    </button>
+    <a href="dashboard.html">
+        <i class="fas fa-home"></i>
+        Dashboard
+    </a>
 
-    <button class="filter-btn"
-            onclick="changeData('month',this)">
-        Last Month
-    </button>
+    <a href="forecasting.html">
+        <i class="fas fa-cloud-sun"></i>
+        Forecasting
+    </a>
 
-    <button class="filter-btn"
-            onclick="showCalendar(this)">
-        Custom Date Range
-    </button>
+    <a href="maintenance.html">
+        <i class="fas fa-tools"></i>
+        Unplanned Maintenance
+    </a>
 
-</div>
+    <a href="row.html">
+        <i class="fas fa-map-marked-alt"></i>
+        ROW
+    </a>
 
+    <a href="cleaning.html">
+        <i class="fas fa-broom"></i>
+        Plant Cleaning Optimisation
+    </a>
 
-<div id="customRange">
+</nav>
 
-    <input type="date" id="start">
+<!-- ================= MAIN ================= -->
 
-    <input type="date" id="end">
+<main class="container">
 
-    <button class="apply"
-            onclick="applyCustom()">
-        Apply
-    </button>
+    <!-- DATE FILTER -->
 
-</div>
+    <section class="filters">
 
-<div class="grid">
-<div class="card"><h3>Expected Generation</h3><div class="value">1245 MWh</div></div>
-<div class="card"><h3>Actual Generation</h3><div class="value">1182 MWh</div></div>
-<div class="card"><h3>Generation Loss</h3><div class="value">63 MWh</div></div>
-<div class="card"><h3>PR</h3><div class="value">82.6%</div></div>
-<div class="card"><h3>Plant Health</h3><div class="value">96%</div></div>
-</div>
+        <button class="filter active" id="btnYesterday">
 
-<div class="twocol">
-<div class="card">
-<h3>Weather Details</h3>
-<p>POA: 945 W/m²<br>GHI: 890 W/m²<br>Ambient: 34°C<br>Module: 49°C<br>Humidity: 54%<br>Wind: 4.8 m/s<br>Rain: 0 mm</p>
-</div>
+            Yesterday
 
-<div class="card">
-<h3>Forecasting Updates</h3>
-<p><b>Next Curtailment:</b> 10:30–10:45 (15 MW)</p>
-<p>Last Weather Report: 09:30</p>
-<p>Next Upload: 10:30</p>
-<button>Open Forecasting</button>
-</div>
-</div>
+        </button>
 
-<div class="chart">
-<h3>Generation Trend</h3>
-<p>Chart.js graph placeholder</p>
-</div>
+        <button class="filter" id="btnWeek">
 
-<div class="flow">
-<h3>Animated Plant Flow (placeholder)</h3>
-<div class="flowline">
-<div class="node">371,700 Modules</div><div class="arrow">➜</div>
-<div class="node">12,390 Strings</div><div class="arrow">➜</div>
-<div class="node bad">819 SCBs</div><div class="arrow">➜</div>
-<div class="node">60 Inverters (58 ON)</div><div class="arrow">➜</div>
-<div class="node">15 ICRs</div><div class="arrow">➜</div>
-<div class="node">HT Panel</div><div class="arrow">➜</div>
-<div class="node">Transformer 1 & 2</div><div class="arrow">➜</div>
-<div class="node">220 kV Bays 202/204</div><div class="arrow">➜</div>
-<div class="node">Bay 205</div><div class="arrow">➜</div>
-<div class="node">Govt Substation</div>
-</div>
-<p><b>Highest Loss Highlight:</b> SCB (demo)</p>
-</div>
-</div>
+            Last Week
 
-<script>
-function toggleMenu(){
-let s=document.getElementById('side');
-s.style.display=s.style.display==='block'?'none':'block';
-}
-function toggleNotify(){
-let n=document.getElementById('notify');
-n.style.display=n.style.display==='block'?'none':'block';
-}
-</script>
+        </button>
+
+        <button class="filter" id="btnMonth">
+
+            Last Month
+
+        </button>
+
+        <button class="filter" id="btnCustom">
+
+            Custom Date
+
+        </button>
+
+    </section>
+
+    <!-- CUSTOM DATE -->
+
+    <section id="customDateBox">
+
+        <label>
+
+            From
+
+            <input type="date" id="startDate">
+
+        </label>
+
+        <label>
+
+            To
+
+            <input type="date" id="endDate">
+
+        </label>
+
+        <button id="applyDate">
+
+            Apply
+
+        </button>
+
+    </section>
+
+    <!-- KPI CARDS -->
+
+    <section class="cards">
+
+        <div class="card">
+
+            <h3>Expected Generation</h3>
+
+            <h1 id="expectedGeneration">
+
+                1245 MWh
+
+            </h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Actual Generation</h3>
+
+            <h1 id="actualGeneration">
+
+                1182 MWh
+
+            </h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Generation Loss</h3>
+
+            <h1 id="generationLoss">
+
+                63 MWh
+
+            </h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Performance Ratio (PR)</h3>
+
+            <h1 id="pr">
+
+                84.2%
+
+            </h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Plant Availability (PA)</h3>
+
+            <h1 id="pa">
+
+                98.6%
+
+            </h1>
+
+        </div>
+
+    </section>
+
+    <!-- WEATHER -->
+
+    <section class="weather">
+
+        <h2>
+
+            Weather Conditions
+
+        </h2>
+
+        <div class="weather-grid">
+
+            <div class="weather-card">
+
+                <span>POA</span>
+
+                <h3 id="poa">
+
+                    945 W/m²
+
+                </h3>
+
+            </div>
+
+            <div class="weather-card">
+
+                <span>GHI</span>
+
+                <h3 id="ghi">
+
+                    910 W/m²
+
+                </h3>
+
+            </div>
+
+            <div class="weather-card">
+
+                <span>Temperature</span>
+
+                <h3 id="temperature">
+
+                    35°C
+
+                </h3>
+
+            </div>
+
+            <div class="weather-card">
+
+                <span>Humidity</span>
+
+                <h3 id="humidity">
+
+                    48%
+
+                </h3>
+
+            </div>
+
+            <div class="weather-card">
+
+                <span>Wind Speed</span>
+
+                <h3 id="wind">
+
+                    5.2 m/s
+
+                </h3>
+
+            </div>
+
+            <div class="weather-card">
+
+                <span>Rainfall</span>
+
+                <h3 id="rain">
+
+                    0 mm
+
+                </h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="dashboard.js"></script>
+
 </body>
 </html>
