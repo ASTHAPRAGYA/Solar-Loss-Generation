@@ -1,332 +1,278 @@
-// ==========================
-// Dashboard dashboardData (Demo)
-window.onload = function () {
+// ==========================================
+// SOLAR GENERATION LOSS OPTIMIZER
+// Dashboard JavaScript
+// ==========================================
 
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-    }
+document.addEventListener("DOMContentLoaded", () => {
 
-    const savedFilter = localStorage.getItem("filter");
+    // ===========================
+    // Demo Dashboard Data
+    // ===========================
 
-    if (savedFilter && dashboardData[savedFilter]) {
-        updateDashboard(dashboardData[savedFilter]);
-    } else {
-        updateDashboard(dashboardData.yesterday);
-    }
+    const dashboardData = {
 
-};
-// ==========================
-const dashboardData = {
+        yesterday:{
 
-    yesterday:{
+            expected:1245,
+            actual:1182,
+            pr:"84.2%",
+            pa:"98.6%",
 
-        expected:"1245 MWh",
-        actual:"1182 MWh",
-        loss:"63 MWh",
-        pr:"82.6%",
-        health:"96%",
+            weather:{
+                poa:"945 W/m²",
+                ghi:"910 W/m²",
+                temp:"35°C",
+                humidity:"48%",
+                wind:"5.2 m/s",
+                rain:"0 mm"
+            }
 
-        weather:{
-            poa:"945 W/m²",
-            ghi:"910 W/m²",
-            temp:"35°C",
-            wind:"5.2 m/s",
-            humidity:"48%",
-            rain:"0 mm"
         },
 
-        highestLoss:"SCB",
+        week:{
 
-        chart:[1180,1205,1215,1230,1228,1245]
+            expected:8420,
+            actual:8115,
+            pr:"84.8%",
+            pa:"98.4%",
 
-    },
+            weather:{
+                poa:"938 W/m²",
+                ghi:"901 W/m²",
+                temp:"34°C",
+                humidity:"51%",
+                wind:"4.8 m/s",
+                rain:"2 mm"
+            }
 
-    week:{
-
-        expected:"8410 MWh",
-        actual:"8015 MWh",
-        loss:"395 MWh",
-        pr:"83.8%",
-        health:"95%",
-
-        weather:{
-            poa:"928 W/m²",
-            ghi:"892 W/m²",
-            temp:"34°C",
-            wind:"4.6 m/s",
-            humidity:"52%",
-            rain:"3 mm"
         },
 
-        highestLoss:"Inverter",
+        month:{
 
-        chart:[7700,7820,7905,7990,8015,8050]
+            expected:36520,
+            actual:35210,
+            pr:"85.1%",
+            pa:"98.9%",
 
-    },
+            weather:{
+                poa:"928 W/m²",
+                ghi:"895 W/m²",
+                temp:"33°C",
+                humidity:"56%",
+                wind:"5.4 m/s",
+                rain:"16 mm"
+            }
 
-    month:{
+        }
 
-        expected:"36500 MWh",
-        actual:"35120 MWh",
-        loss:"1380 MWh",
-        pr:"84.5%",
-        health:"96.5%",
+    };
 
-        weather:{
-            poa:"932 W/m²",
-            ghi:"900 W/m²",
-            temp:"33°C",
-            wind:"5.1 m/s",
-            humidity:"50%",
-            rain:"15 mm"
-        },
+    // ===========================
+    // Disable Future Dates
+    // ===========================
 
-        highestLoss:"Transformer",
+    const today = new Date().toISOString().split("T")[0];
 
-        chart:[33000,33800,34400,34750,35000,35120]
+    document.getElementById("startDate").max = today;
+    document.getElementById("endDate").max = today;
 
-    }
+    // ===========================
+    // Sidebar
+    // ===========================
 
-};
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
 
-// ==========================
-// Activate Selected Button
-// ==========================
-function setActive(button) {
+    menuBtn.addEventListener("click",()=>{
 
-    document.querySelectorAll(".filter-btn")
-        .forEach(btn => btn.classList.remove("active"));
-
-    button.classList.add("active");
-
-}
-
-// ==========================
-// Animate KPI Update
-// ==========================
-function animateValue(id, value) {
-
-    const el = document.getElementById(id);
-
-    if (!el) return;
-
-    el.classList.add("fade");
-
-    setTimeout(() => {
-
-        el.innerHTML = value;
-
-        el.classList.remove("fade");
-
-    }, 200);
-
-}
-
-// ==========================
-// Update Dashboard
-// ==========================
-function updateDashboard(d){
-
-    animateValue("expected", d.expected);
-    animateValue("actual", d.actual);
-    animateValue("loss", d.loss);
-    animateValue("pr", d.pr);
-    animateValue("health", d.health);
-
-    if(d.weather){
-        updateWeather(d.weather);
-    }
-
-    if(d.highestLoss){
-        updatePlantFlow(d.highestLoss);
-    }
-
-    if(d.chart){
-        updateGenerationChart(d.chart);
-    }
-
-}
-
-// ==========================
-// Yesterday
-// ==========================
-document.addEventListener("DOMContentLoaded", function(){
-
-    // Yesterday button
-    // Week button
-    // Month button
-    // Custom button
-    // Apply button
-
-});
-.addEventListener("click", function () {
-
-    setActive(this);
-
-    document.getElementById("customRange").style.display = "none";
-
-    updateDashboard(dashboardData.yesterday);
-    localStorage.setItem("filter","yesterday");
-
-});
-
-// ==========================
-// Last Week
-// ==========================
-document.getElementById("btnWeek")
-.addEventListener("click", function () {
-
-    setActive(this);
-
-    document.getElementById("customRange").style.display = "none";
-
-    updateDashboard(dashboardData.week);
-    localStorage.setItem("filter","Last Week");
-
-});
-
-// ==========================
-// Last Month
-// ==========================
-document.getElementById("btnMonth")
-.addEventListener("click", function () {
-
-    setActive(this);
-
-    document.getElementById("customRange").style.display = "none";
-
-    updateDashboard(dashboardData.month);
-    localStorage.setItem("filter","Last Month");
-
-});
-
-// ==========================
-// Custom Date
-// ==========================
-document.getElementById("btnCustom")
-.addEventListener("click", function () {
-
-    setActive(this);
-
-    document.getElementById("customRange").style.display = "flex";
-
-});
-
-// ==========================
-// Apply Custom Range
-// ==========================
-document.getElementById("applyRange")
-.addEventListener("click", function () {
-
-    const start = document.getElementById("startDate").value;
-    const end = document.getElementById("endDate").value;
-
-    if (start === "" || end === "") {
-
-      const error=document.getElementById("dateError");
-
-if(error){
-
-    error.innerHTML="⚠ Please select both dates.";
-
-}
-
-        return;
-
-    }
-
-    // Demo values
-    updateDashboard({
-
-        expected: "5120 MWh",
-        actual: "4890 MWh",
-        loss: "230 MWh",
-        pr: "84.1%",
-        health: "95.8%"
+        sidebar.classList.toggle("active");
 
     });
 
+    // ===========================
+    // Profile Dropdown
+    // ===========================
+
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
+
+    profileBtn.addEventListener("click",(e)=>{
+
+        e.stopPropagation();
+
+        profileMenu.style.display =
+        profileMenu.style.display==="block"
+        ? "none"
+        : "block";
+
+    });
+
+    document.addEventListener("click",()=>{
+
+        profileMenu.style.display="none";
+
+    });
+
+    // ===========================
+    // Buttons
+    // ===========================
+
+    const filters=document.querySelectorAll(".filter");
+
+    filters.forEach(button=>{
+
+        button.addEventListener("click",()=>{
+
+            filters.forEach(btn=>btn.classList.remove("active"));
+
+            button.classList.add("active");
+
+        });
+
+    });
+
+    // ===========================
+    // Dashboard Update
+    // ===========================
+
+    function updateDashboard(data){
+
+        document.getElementById("expectedGeneration").innerHTML =
+        data.expected + " MWh";
+
+        document.getElementById("actualGeneration").innerHTML =
+        data.actual + " MWh";
+
+        document.getElementById("generationLoss").innerHTML =
+        (data.expected-data.actual)+" MWh";
+
+        document.getElementById("pr").innerHTML =
+        data.pr;
+
+        document.getElementById("pa").innerHTML =
+        data.pa;
+
+        document.getElementById("poa").innerHTML =
+        data.weather.poa;
+
+        document.getElementById("ghi").innerHTML =
+        data.weather.ghi;
+
+        document.getElementById("temperature").innerHTML =
+        data.weather.temp;
+
+        document.getElementById("humidity").innerHTML =
+        data.weather.humidity;
+
+        document.getElementById("wind").innerHTML =
+        data.weather.wind;
+
+        document.getElementById("rain").innerHTML =
+        data.weather.rain;
+
+    }
+
+    // ===========================
+    // Yesterday
+    // ===========================
+
+    document.getElementById("btnYesterday")
+    .addEventListener("click",()=>{
+
+        document.getElementById("customDateBox").style.display="none";
+
+        updateDashboard(dashboardData.yesterday);
+
+    });
+
+    // ===========================
+    // Last Week
+    // ===========================
+
+    document.getElementById("btnWeek")
+    .addEventListener("click",()=>{
+
+        document.getElementById("customDateBox").style.display="none";
+
+        updateDashboard(dashboardData.week);
+
+    });
+
+    // ===========================
+    // Last Month
+    // ===========================
+
+    document.getElementById("btnMonth")
+    .addEventListener("click",()=>{
+
+        document.getElementById("customDateBox").style.display="none";
+
+        updateDashboard(dashboardData.month);
+
+    });
+
+    // ===========================
+    // Custom Date
+    // ===========================
+
+    document.getElementById("btnCustom")
+    .addEventListener("click",()=>{
+
+        document.getElementById("customDateBox").style.display="block";
+
+    });
+
+    // ===========================
+    // Apply Custom Date
+    // ===========================
+
+    document.getElementById("applyDate")
+    .addEventListener("click",()=>{
+
+        const start=document.getElementById("startDate").value;
+        const end=document.getElementById("endDate").value;
+
+        if(start==="" || end===""){
+
+            alert("Please select both dates.");
+
+            return;
+
+        }
+
+        if(start>end){
+
+            alert("End Date cannot be before Start Date.");
+
+            return;
+
+        }
+
+        // Demo values
+        updateDashboard({
+
+            expected:5220,
+            actual:5010,
+            pr:"84.5%",
+            pa:"98.2%",
+
+            weather:{
+                poa:"930 W/m²",
+                ghi:"900 W/m²",
+                temp:"34°C",
+                humidity:"50%",
+                wind:"4.7 m/s",
+                rain:"5 mm"
+            }
+
+        });
+
+    });
+
+    // ===========================
+    // Default Dashboard
+    // ===========================
+
+    updateDashboard(dashboardData.yesterday);
+
 });
-
-// ==========================
-// Notification Drawer
-// ==========================
-function toggleNotification() {
-
-    const panel = document.getElementById("notificationPanel");
-
-    if (!panel) return;
-
-    panel.classList.toggle("show");
-
-}
-
-// ==========================
-// Sidebar
-function updateWeather(weather){
-
-document.getElementById("poa").innerHTML=weather.poa;
-
-document.getElementById("ghi").innerHTML=weather.ghi;
-
-document.getElementById("temp").innerHTML=weather.temp;
-
-document.getElementById("wind").innerHTML=weather.wind;
-
-document.getElementById("humidity").innerHTML=weather.humidity;
-
-document.getElementById("rain").innerHTML=weather.rain;
-
-}
-// ==========================
-function toggleSidebar() {
-
-    const sidebar = document.getElementById("sidebar");
-
-    if (!sidebar) return;
-
-    sidebar.classList.toggle("expanded");
-
-}
-
-// ==========================
-// Dark Mode
-function updatePlantFlow(equipment){
-
-document
-
-.querySelectorAll(".plant-node")
-
-.forEach(node=>{
-
-node.classList.remove("danger");
-
-});
-
-const active=document.getElementById(equipment);
-
-if(active){
-
-active.classList.add("danger");
-
-}
-
-}
-// ==========================
-function toggleDarkMode() {
-
-   document.body.classList.toggle("dark-mode");
-
-localStorage.setItem(
-
-"theme",
-
-document.body.classList.contains("dark-mode")
-
-? "dark"
-
-: "light"
-
-);
-
-}
