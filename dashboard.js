@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btnCustom")
     .addEventListener("click",()=>{
 
-        document.getElementById("customDateBox").style.display="block";
+        document.getElementById("customDateBox").style.display="flex";
 
     });
 
