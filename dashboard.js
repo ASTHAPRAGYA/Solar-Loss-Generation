@@ -221,7 +221,40 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("customDateBox").style.display="flex";
 
     });
+function validateDate(input){
 
+    const today = new Date();
+
+    today.setHours(0,0,0,0);
+
+    const selected = new Date(input.value);
+
+    if(selected > today){
+
+        alert("Future dates cannot be selected.");
+
+        input.value="";
+
+        return false;
+
+    }
+
+    return true;
+
+}
+    document.getElementById("startDate")
+.addEventListener("change",function(){
+
+    validateDate(this);
+
+});
+
+document.getElementById("endDate")
+.addEventListener("change",function(){
+
+    validateDate(this);
+
+});
     // ===========================
     // Apply Custom Date
     // ===========================
