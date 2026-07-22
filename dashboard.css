@@ -1,8 +1,472 @@
-:root{--primary:#27A5AD;--bg:#f4f8f9}
-body{font-family:Poppins,sans-serif;background:var(--bg);margin:0}
-.filters{display:flex;gap:10px;flex-wrap:wrap}
-.filter-btn{padding:10px 18px;border-radius:24px;border:2px solid var(--primary);background:#fff;color:var(--primary);cursor:pointer;transition:.3s}
-.filter-btn.active,.filter-btn:hover{background:var(--primary);color:#fff;transform:translateY(-2px)}
-#customRange{display:none;margin-top:10px;gap:10px}
-input[type=date]{padding:8px;border:1px solid #ccc;border-radius:8px}
-.kpi-value{transition:opacity .3s,transform .3s}.fade{opacity:.2;transform:scale(.96)}
+/* ===================================
+   SOLAR GENERATION LOSS OPTIMIZER
+   Dashboard CSS
+   Brand Color : #27A5AD
+=================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#F5F8FA;
+    color:#222;
+}
+
+/* ===========================
+        TOP HEADER
+=========================== */
+
+.topbar{
+    width:100%;
+    height:70px;
+    background:#ffffff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:999;
+}
+
+.left-section{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.left-section h2{
+    color:#27A5AD;
+    font-size:23px;
+    font-weight:600;
+}
+
+/* ===========================
+        MENU BUTTON
+=========================== */
+
+#menuBtn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    background:#27A5AD;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+    font-size:18px;
+}
+
+#menuBtn:hover{
+    transform:rotate(90deg);
+}
+
+/* ===========================
+        PROFILE
+=========================== */
+
+.profile{
+    position:relative;
+}
+
+#profileBtn{
+    background:#27A5AD;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.profile-menu{
+
+    display:none;
+
+    position:absolute;
+
+    right:0;
+
+    top:55px;
+
+    width:170px;
+
+    background:white;
+
+    border-radius:10px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+    overflow:hidden;
+
+}
+
+.profile-menu a{
+
+    display:block;
+
+    padding:14px;
+
+    color:#333;
+
+    text-decoration:none;
+
+}
+
+.profile-menu a:hover{
+
+    background:#27A5AD;
+
+    color:white;
+
+}
+
+.profile:hover .profile-menu{
+
+    display:block;
+
+}
+
+/* ===========================
+        SIDEBAR
+=========================== */
+
+#sidebar{
+
+    position:fixed;
+
+    top:70px;
+
+    left:-260px;
+
+    width:250px;
+
+    height:100%;
+
+    background:white;
+
+    box-shadow:5px 0 20px rgba(0,0,0,.1);
+
+    transition:.4s;
+
+    padding-top:20px;
+
+    z-index:999;
+
+}
+
+#sidebar.active{
+
+    left:0;
+
+}
+
+#sidebar h3{
+
+    padding:20px;
+
+    color:#27A5AD;
+
+}
+
+#sidebar a{
+
+    display:block;
+
+    padding:18px 25px;
+
+    color:#444;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+#sidebar a:hover{
+
+    background:#27A5AD;
+
+    color:white;
+
+}
+
+/* ===========================
+        MAIN
+=========================== */
+
+.container{
+
+    margin-top:95px;
+
+    padding:35px;
+
+}
+
+/* ===========================
+        FILTER BUTTONS
+=========================== */
+
+.filters{
+
+    display:flex;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:25px;
+
+}
+
+.filter{
+
+    background:white;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    color:#27A5AD;
+
+    font-weight:600;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.filter:hover{
+
+    background:#27A5AD;
+
+    color:white;
+
+    transform:translateY(-3px);
+
+}
+
+.filter.active{
+
+    background:#27A5AD;
+
+    color:white;
+
+}
+
+/* ===========================
+        CUSTOM DATE
+=========================== */
+
+#customDateBox{
+
+    display:none;
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+#customDateBox label{
+
+    display:block;
+
+    margin-bottom:15px;
+
+    color:#555;
+
+}
+
+#customDateBox input{
+
+    margin-top:6px;
+
+    width:100%;
+
+    padding:10px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+}
+
+#applyDate{
+
+    margin-top:15px;
+
+    background:#27A5AD;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 24px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+/* ===========================
+        KPI CARDS
+=========================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:22px;
+
+    margin-bottom:35px;
+
+}
+
+.card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.card h3{
+
+    color:#666;
+
+    margin-bottom:12px;
+
+    font-size:16px;
+
+}
+
+.card h1{
+
+    color:#27A5AD;
+
+    font-size:30px;
+
+}
+
+/* ===========================
+        WEATHER
+=========================== */
+
+.weather{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.weather h2{
+
+    color:#27A5AD;
+
+    margin-bottom:20px;
+
+}
+
+.weather-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+
+    gap:20px;
+
+}
+
+.weather-card{
+
+    background:#F7FCFC;
+
+    border-left:5px solid #27A5AD;
+
+    border-radius:12px;
+
+    padding:18px;
+
+}
+
+.weather-card span{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+.weather-card h3{
+
+    margin-top:10px;
+
+    color:#27A5AD;
+
+    font-size:24px;
+
+}
+
+/* ===========================
+        RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.left-section h2{
+
+    font-size:18px;
+
+}
+
+.container{
+
+    padding:18px;
+
+}
+
+.filters{
+
+    justify-content:center;
+
+}
+
+}
