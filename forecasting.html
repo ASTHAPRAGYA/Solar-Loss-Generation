@@ -166,7 +166,28 @@
 
     </section>
 
+<div
+    class="curtailment-alarm"
+    id="curtailmentAlarm">
 
+    <div class="alarm-icon">
+        ⚠
+    </div>
+
+    <div class="alarm-content">
+
+        <strong>
+            Curtailment Limit Exceeded
+        </strong>
+
+        <p id="alarmMessage">
+            Solar + Wind load exceeds the scheduled
+            curtailment limit.
+        </p>
+
+    </div>
+
+</div>
 
     <!-- =================================================
          TRAS DOWN SCHEDULE
@@ -200,15 +221,15 @@
 
         <!-- TRAS STATUS -->
 
-        <div class="tras-status">
+       <div class="tras-status">
 
-            <span class="status-dot"></span>
+    <span class="status-dot"></span>
 
-            <strong>
-                TRAS Down active — check AS schedule in WBES
-            </strong>
+    <strong>
+        TRAS Down active — check AS schedule in WBES
+    </strong>
 
-        </div>
+</div>
 
 
 
@@ -233,12 +254,12 @@
             </div>
 
 
-            <div class="schedule-value">
+           <div class="schedule-value">
 
-                13:15 - 13:30 =
-                <strong>241 MW</strong>
+    After TRAS Down Total Schedule for
+    <strong>13:45 - 14:00 = 241.21 MW</strong>
 
-            </div>
+</div>
 
 
         </div>
@@ -352,12 +373,13 @@
 
                         <td>
 
-                            <input
-                                type="number"
-                                id="solarLoad"
-                                placeholder="Enter Solar MW"
-                                min="0"
-                                step="0.01">
+                           <input
+    type="number"
+    id="solarLoad"
+    placeholder="Max 191.40 MW"
+    min="0"
+    max="191.4"
+    step="0.01">
 
                         </td>
 
@@ -365,11 +387,12 @@
                         <td>
 
                             <input
-                                type="number"
-                                id="windLoad"
-                                placeholder="Enter Wind MW"
-                                min="0"
-                                step="0.01">
+    type="number"
+    id="windLoad"
+    placeholder="Max 204.75 MW"
+    min="0"
+    max="204.75"
+    step="0.01">
 
                         </td>
 
