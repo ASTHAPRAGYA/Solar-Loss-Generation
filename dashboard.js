@@ -4,7 +4,34 @@
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
+// ===============================
+// Upload DGR
+// ===============================
 
+const uploadDGRBtn = document.getElementById("uploadDGRBtn");
+const dgrFileInput = document.getElementById("dgrFileInput");
+
+if (uploadDGRBtn && dgrFileInput) {
+
+    uploadDGRBtn.addEventListener("click", function () {
+
+        dgrFileInput.click();
+
+    });
+
+    dgrFileInput.addEventListener("change", function () {
+
+        if (this.files.length > 0) {
+
+            const fileName = this.files[0].name;
+
+            alert("DGR uploaded: " + fileName);
+
+        }
+
+    });
+
+}
     // ===========================
     // Demo Dashboard Data
     // ===========================
