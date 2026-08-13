@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Forecasting | Solar Generation Loss Optimizer</title>
+
+    <link rel="stylesheet"
+          href="forecasting.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP HEADER
+===================================================== -->
+
+<header class="top-header">
+
+    <div class="header-left">
+
+        <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open Menu">
+
+            ☰
+
+        </button>
+
+        <h1>Forecasting</h1>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <button
+            class="profile-btn"
+            id="profileBtn">
+
+            Welcome Administrator ▾
+
+        </button>
+
+
+        <div
+            class="profile-menu"
+            id="profileMenu">
+
+            <a href="profile.html">
+                Visit Profile
+            </a>
+
+            <a href="login.html">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar">
+
+
+    <div class="sidebar-title">
+
+        Solar Loss Optimizer
+
+    </div>
+
+
+    <nav>
+
+        <a href="dashboard.html">
+            🏠 Dashboard
+        </a>
+
+        <a href="forecasting.html"
+           class="active">
+            📊 Forecasting
+        </a>
+
+        <a href="maintenance.html">
+            🔧 Unplanned Maintenance
+        </a>
+
+        <a href="row.html">
+            📍 ROW Monitoring
+        </a>
+
+        <a href="cleaning.html">
+            🧹 Plant Cleaning Optimisation
+        </a>
+
+        <a href="login.html"
+           class="logout-link">
+            ↪ Logout
+        </a>
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         PRIORITY NOTIFICATION
+    ================================================== -->
+
+    <section
+        class="priority-alert"
+        id="priorityAlert">
+
+        <div class="priority-icon">
+            !
+        </div>
+
+
+        <div class="priority-content">
+
+            <strong>
+                Priority Notification
+            </strong>
+
+            <p>
+                New HO curtailment schedule received.
+                Please check the latest schedule.
+            </p>
+
+        </div>
+
+
+        <button
+            class="check-btn"
+            id="checkScheduleBtn">
+
+            Check Schedule
+
+        </button>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TRAS DOWN SCHEDULE
+    ================================================== -->
+
+    <section class="forecast-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    TRAS Down Schedule
+                </h2>
+
+                <p>
+                    Previous Date: 21/07/2026
+                </p>
+
+            </div>
+
+
+            <span class="schedule-date">
+                21/07/2026
+            </span>
+
+        </div>
+
+
+
+        <!-- TRAS STATUS -->
+
+        <div class="tras-status">
+
+            <span class="status-dot"></span>
+
+            <strong>
+                TRAS Down active — check AS schedule in WBES
+            </strong>
+
+        </div>
+
+
+
+        <!-- TRAS SCHEDULE -->
+
+        <div class="tras-schedule">
+
+
+            <div class="schedule-title">
+
+                <!-- Excel-style icon -->
+
+                <span class="excel-icon">
+                    X
+                </span>
+
+
+                <span>
+                    TRAS Down Total Schedule
+                </span>
+
+            </div>
+
+
+            <div class="schedule-value">
+
+                13:15 - 13:30 =
+                <strong>241 MW</strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- CONTACT -->
+
+        <div class="contact-section">
+
+            <span>
+                ☎
+            </span>
+
+            <strong>
+                011-40408032
+            </strong>
+
+        </div>
+
+
+
+        <!-- HO COMMUNICATION -->
+
+        <div class="communication-actions">
+
+            <button
+                class="secondary-btn"
+                id="tagHOBtn">
+
+                🏷 Tag Head Office
+
+            </button>
+
+
+            <button
+                class="secondary-btn"
+                id="chatHOBtn">
+
+                💬 Chat with Head Office
+
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         15 MINUTE LOAD UPDATE
+    ================================================== -->
+
+    <section class="forecast-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    15-Minute Load Update
+                </h2>
+
+                <p>
+                    Enter actual site load during the
+                    scheduled interval.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="load-table-wrapper">
+
+            <table class="load-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Time Interval
+                        </th>
+
+                        <th>
+                            Solar (MW)
+                        </th>
+
+                        <th>
+                            Wind (MW)
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            <strong>
+                                13:15 - 13:30
+                            </strong>
+                        </td>
+
+
+                        <td>
+
+                            <input
+                                type="number"
+                                id="solarLoad"
+                                placeholder="Enter Solar MW"
+                                min="0"
+                                step="0.01">
+
+                        </td>
+
+
+                        <td>
+
+                            <input
+                                type="number"
+                                id="windLoad"
+                                placeholder="Enter Wind MW"
+                                min="0"
+                                step="0.01">
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <div class="load-submit-area">
+
+            <button
+                class="primary-btn"
+                id="submitLoadBtn">
+
+                Enter
+
+            </button>
+
+
+            <span
+                id="loadStatus"
+                class="form-status">
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         WEATHER UPDATE
+    ================================================== -->
+
+    <section class="forecast-card weather-section">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    🌦 Weather Update
+                </h2>
+
+                <p>
+                    Upload site photographs every 30 minutes
+                    with observations for Head Office.
+                </p>
+
+            </div>
+
+
+            <span class="upload-frequency">
+                Required every 30 minutes
+            </span>
+
+        </div>
+
+
+
+        <!-- WEATHER REPORT GRID -->
+
+        <div class="weather-grid">
+
+
+
+            <!-- =========================================
+                 13:15 - 13:30
+            ========================================== -->
+
+            <div class="weather-report-card">
+
+
+                <div class="weather-time">
+
+                    13:15 - 13:30
+
+                </div>
+
+
+
+                <!-- Uploaded Site Photo -->
+
+                <img
+                    src="assets/weather-site-1315.jpg"
+                    class="weather-photo"
+                    alt="Site weather photograph for 13:15 to 13:30">
+
+
+
+                <div class="photo-label">
+
+                    Site Weather Photograph
+
+                </div>
+
+
+
+                <!-- Comment -->
+
+                <label
+                    for="comment1315">
+
+                    Comments
+
+                </label>
+
+
+                <textarea
+                    id="comment1315"
+                    class="weather-comment"
+                    placeholder="Enter observations about weather conditions at site...">
+                </textarea>
+
+
+
+                <!-- Send -->
+
+                <button
+                    class="send-weather-btn"
+                    id="sendWeather1315">
+
+                    📤 Send Weather Report
+
+                </button>
+
+
+                <div
+                    id="status1315"
+                    class="weather-status">
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 13:00 - 13:15
+            ========================================== -->
+
+            <div class="weather-report-card">
+
+
+                <div class="weather-time">
+
+                    13:00 - 13:15
+
+                </div>
+
+
+
+                <!-- Empty Photo Slot -->
+
+                <div
+                    class="photo-placeholder"
+                    id="photoPlaceholder1300">
+
+                    <span>
+                        📷
+                    </span>
+
+                    <p>
+                        No photo uploaded
+                    </p>
+
+                </div>
+
+
+
+                <!-- Comment -->
+
+                <label
+                    for="comment1300">
+
+                    Comments
+
+                </label>
+
+
+                <textarea
+                    id="comment1300"
+                    class="weather-comment"
+                    placeholder="Enter observations about weather conditions at site...">
+                </textarea>
+
+
+
+                <!-- Send -->
+
+                <button
+                    class="send-weather-btn"
+                    id="sendWeather1300">
+
+                    📤 Send Weather Report
+
+                </button>
+
+
+                <div
+                    id="status1300"
+                    class="weather-status">
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             UPLOAD NEW PHOTO
+        ========================================== -->
+
+        <div class="upload-photo-area">
+
+
+            <button
+                class="upload-photo-btn"
+                id="uploadPhotoBtn">
+
+                📷 Upload Site Photo
+
+            </button>
+
+
+            <input
+                type="file"
+                id="sitePhotoInput"
+                accept="image/*"
+                style="display:none;">
+
+
+            <p
+                id="selectedPhotoName"
+                class="selected-photo-name">
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACTIVE CURTAILMENT SUMMARY
+    ================================================== -->
+
+    <section class="forecast-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Active Curtailment Summary
+                </h2>
+
+                <p>
+                    Current hybrid plant curtailment position
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="curtailment-summary">
+
+
+            <div class="summary-item">
+
+                <span>
+                    Scheduled Curtailment
+                </span>
+
+                <strong>
+                    241 MW
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Solar Load
+                </span>
+
+                <strong id="summarySolar">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Wind Load
+                </span>
+
+                <strong id="summaryWind">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Plant Capacity
+                </span>
+
+                <strong>
+                    300 MW
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+</main>
+
+
+
+<!-- =====================================================
+     TAG HEAD OFFICE MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="tagModal">
+
+
+    <div class="modal">
+
+
+        <button
+            class="modal-close"
+            id="closeTagModal">
+
+            ×
+
+        </button>
+
+
+        <h2>
+            Tag Head Office
+        </h2>
+
+
+        <p>
+            Select the Head Office team/contact you want
+            to notify.
+        </p>
+
+
+        <select id="hoContact">
+
+            <option value="">
+                Select Contact
+            </option>
+
+            <option value="forecasting">
+                Forecasting Team
+            </option>
+
+            <option value="operations">
+                Operations Team
+            </option>
+
+            <option value="management">
+                Plant Management
+            </option>
+
+        </select>
+
+
+        <textarea
+            id="hoMessage"
+            placeholder="Enter your message...">
+        </textarea>
+
+
+        <button
+            class="primary-btn"
+            id="sendHOMsg">
+
+            Send Notification
+
+        </button>
+
+
+        <div
+            id="hoStatus"
+            class="form-status">
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     CHAT MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="chatModal">
+
+
+    <div class="modal">
+
+
+        <button
+            class="modal-close"
+            id="closeChatModal">
+
+            ×
+
+        </button>
+
+
+        <h2>
+            Chat with Head Office
+        </h2>
+
+
+        <div
+            class="chat-window"
+            id="chatWindow">
+
+
+            <div class="chat-message received">
+
+                <strong>
+                    HO Forecasting Team
+                </strong>
+
+                <p>
+                    Please check the latest AS schedule
+                    in WBES.
+                </p>
+
+                <span>
+                    13:05
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="chat-input-area">
+
+
+            <input
+                type="text"
+                id="chatMessage"
+                placeholder="Type your message...">
+
+
+            <button
+                id="sendChatBtn">
+
+                Send
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="forecasting.js"></script>
+
+
+</body>
+
+</html>
