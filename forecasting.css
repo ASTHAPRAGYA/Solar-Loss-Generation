@@ -1527,3 +1527,416 @@ body {
     }
 
 }
+/* =====================================================
+   HO FLOATING CHATBOT
+===================================================== */
+
+.ho-chatbot {
+
+    position: fixed;
+
+    right: 24px;
+
+    bottom: 24px;
+
+    z-index: 9999;
+
+}
+
+
+/* =====================================================
+   CHAT BUTTON
+===================================================== */
+
+.ho-chat-button {
+
+    width: 54px;
+
+    height: 54px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #27A5AD;
+
+    color: white;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 20px rgba(0,0,0,0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.ho-chat-button:hover {
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.25);
+
+}
+
+
+/* =====================================================
+   NOTIFICATION BADGE
+===================================================== */
+
+.ho-chat-badge {
+
+    position: absolute;
+
+    right: -3px;
+
+    top: -5px;
+
+    width: 22px;
+
+    height: 22px;
+
+    background: #d93025;
+
+    color: white;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    border: 2px solid white;
+
+    animation: chatBadgePulse 1.5s infinite;
+
+}
+
+
+@keyframes chatBadgePulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   CHAT WINDOW
+===================================================== */
+
+.ho-chat-window {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 68px;
+
+    width: 330px;
+
+    background: white;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.20);
+
+    overflow: hidden;
+
+    display: none;
+
+    animation: chatOpen 0.2s ease;
+
+}
+
+
+.ho-chat-window.show {
+
+    display: block;
+
+}
+
+
+@keyframes chatOpen {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.ho-chat-header {
+
+    background: #27A5AD;
+
+    color: white;
+
+    padding: 14px 16px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.ho-chat-header strong {
+
+    display: block;
+
+    font-size: 14px;
+
+}
+
+
+.ho-chat-header small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    opacity: 0.85;
+
+    font-size: 11px;
+
+}
+
+
+.ho-chat-close {
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.ho-chat-content {
+
+    padding: 14px;
+
+}
+
+
+.ho-message {
+
+    background: #f1f7f8;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+}
+
+
+.ho-message-title {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #27A5AD;
+
+    margin-bottom: 7px;
+
+}
+
+
+.ho-message p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #333;
+
+}
+
+
+.ho-message-time {
+
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 10px;
+
+    color: #888;
+
+}
+
+
+/* =====================================================
+   REPLY AREA
+===================================================== */
+
+.ho-reply-area {
+
+    display: none;
+
+    margin-top: 10px;
+
+}
+
+
+.ho-reply-area.show {
+
+    display: block;
+
+}
+
+
+.ho-reply-area textarea {
+
+    width: 100%;
+
+    min-height: 65px;
+
+    resize: none;
+
+    padding: 9px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    box-sizing: border-box;
+
+}
+
+
+.ho-send-btn {
+
+    margin-top: 6px;
+
+    border: none;
+
+    background: #27A5AD;
+
+    color: white;
+
+    padding: 7px 14px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.ho-chat-actions {
+
+    display: flex;
+
+    gap: 8px;
+
+    padding: 10px 14px 14px;
+
+}
+
+
+.ho-chat-actions button,
+.ho-chat-actions a {
+
+    flex: 1;
+
+    text-align: center;
+
+    padding: 9px 6px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+}
+
+
+.ho-reply-button {
+
+    border: 1px solid #27A5AD;
+
+    background: white;
+
+    color: #27A5AD;
+
+}
+
+
+.ho-call-button {
+
+    background: #27A5AD;
+
+    color: white;
+
+}
