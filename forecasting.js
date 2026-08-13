@@ -1,79 +1,231 @@
-// ============================================================
+// =========================================================
 // SOLAR GENERATION LOSS OPTIMIZER
-// FORECASTING JAVASCRIPT
-// ============================================================
+// FORECASTING PAGE
+// =========================================================
 
 document.addEventListener("DOMContentLoaded", function () {
+    // =====================================================
+// HO FLOATING CHATBOT
+// =====================================================
+
+const hoChatButton =
+    document.getElementById("hoChatButton");
+
+const hoChatWindow =
+    document.getElementById("hoChatWindow");
+
+const hoChatClose =
+    document.getElementById("hoChatClose");
+
+const hoChatBadge =
+    document.getElementById("hoChatBadge");
+
+const replyHOButton =
+    document.getElementById("replyHOButton");
+
+const hoReplyArea =
+    document.getElementById("hoReplyArea");
+
+const sendHOReply =
+    document.getElementById("sendHOReply");
+
+const hoReplyText =
+    document.getElementById("hoReplyText");
 
 
-    // ========================================================
+// =====================================================
+// OPEN CHAT
+// =====================================================
+
+if (hoChatButton) {
+
+    hoChatButton.addEventListener(
+        "click",
+        function () {
+
+            hoChatWindow.classList.toggle("show");
+
+        }
+    );
+
+}
+
+
+// =====================================================
+// CLOSE CHAT
+// =====================================================
+
+if (hoChatClose) {
+
+    hoChatClose.addEventListener(
+        "click",
+        function () {
+
+            hoChatWindow.classList.remove("show");
+
+        }
+    );
+
+}
+
+
+// =====================================================
+// REPLY
+// =====================================================
+
+if (replyHOButton) {
+
+    replyHOButton.addEventListener(
+        "click",
+        function () {
+
+            hoReplyArea.classList.toggle("show");
+
+            if (hoReplyArea.classList.contains("show")) {
+
+                hoReplyText.focus();
+
+            }
+
+        }
+    );
+
+}
+
+
+// =====================================================
+// SEND REPLY
+// =====================================================
+
+if (sendHOReply) {
+
+    sendHOReply.addEventListener(
+        "click",
+        function () {
+
+            const message =
+                hoReplyText.value.trim();
+
+
+            if (message === "") {
+
+                return;
+
+            }
+
+
+            alert(
+                "Reply sent to Forecasting Team — HO."
+            );
+
+
+            hoReplyText.value = "";
+
+            hoReplyArea.classList.remove("show");
+
+        }
+    );
+
+}
+
+
+// =====================================================
+// CHECK LOW GENERATION
+// =====================================================
+
+function checkLowGenerationAlert() {
+
+    const solarInput =
+        document.getElementById("solarLoad");
+
+    const windInput =
+        document.getElementById("windLoad");
+
+
+    if (!solarInput || !windInput) {
+
+        return;
+
+    }
+
+
+    const solar =
+        parseFloat(solarInput.value) || 0;
+
+    const wind =
+        parseFloat(windInput.value) || 0;
+
+
+    const combinedLoad =
+        solar + wind;
+
+
+    // LOW GENERATION CONDITION
+    if (combinedLoad < 70) {
+
+        hoChatBadge.style.display = "flex";
+
+    } else {
+
+        hoChatBadge.style.display = "none";
+
+    }
+
+}
+
+
+// =====================================================
+// CHECK WHEN LOAD CHANGES
+// =====================================================
+
+if (solarInput) {
+
+    solarInput.addEventListener(
+        "input",
+        checkLowGenerationAlert
+    );
+
+}
+
+
+if (windInput) {
+
+    windInput.addEventListener(
+        "input",
+        checkLowGenerationAlert
+    );
+
+}
+
+
+// =====================================================
+// INITIAL CHECK
+// =====================================================
+
+checkLowGenerationAlert();
+
+
+    // =====================================================
     // CONSTANTS
-    // ========================================================
+    // =====================================================
 
-    const SOLAR_MAX = 191.40;
-    const WIND_MAX = 204.75;
+    const MAX_SOLAR = 191.40;
+
+    const MAX_WIND = 204.75;
+
     const SCHEDULED_CURTAILMENT = 241.21;
 
 
-    // ========================================================
-    // ELEMENTS
-    // ========================================================
-
-    const menuBtn = document.getElementById("menuBtn");
-    const sidebar = document.getElementById("sidebar");
-
-    const profileBtn = document.getElementById("profileBtn");
-    const profileMenu = document.getElementById("profileMenu");
-
-    const solarInput = document.getElementById("solarLoad");
-    const windInput = document.getElementById("windLoad");
-
-    const summarySolar = document.getElementById("summarySolar");
-    const summaryWind = document.getElementById("summaryWind");
-
-    const loadStatus = document.getElementById("loadStatus");
-    const curtailmentAlarm = document.getElementById("curtailmentAlarm");
-    const alarmMessage = document.getElementById("alarmMessage");
-
-    const submitLoadBtn = document.getElementById("submitLoadBtn");
-
-    const uploadPhotoBtn = document.getElementById("uploadPhotoBtn");
-    const sitePhotoInput = document.getElementById("sitePhotoInput");
-    const selectedPhotoName =
-        document.getElementById("selectedPhotoName");
-
-    const tagHOBtn = document.getElementById("tagHOBtn");
-    const chatHOBtn = document.getElementById("chatHOBtn");
-
-    const tagModal = document.getElementById("tagModal");
-    const chatModal = document.getElementById("chatModal");
-
-    const closeTagModal =
-        document.getElementById("closeTagModal");
-
-    const closeChatModal =
-        document.getElementById("closeChatModal");
-
-    const sendHOMsg =
-        document.getElementById("sendHOMsg");
-
-    const hoStatus =
-        document.getElementById("hoStatus");
-
-    const sendChatBtn =
-        document.getElementById("sendChatBtn");
-
-    const chatMessage =
-        document.getElementById("chatMessage");
-
-    const chatWindow =
-        document.getElementById("chatWindow");
-
-
-
-    // ========================================================
+    // =====================================================
     // SIDEBAR
-    // ========================================================
+    // =====================================================
+
+    const menuBtn =
+        document.getElementById("menuBtn");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
 
     if (menuBtn && sidebar) {
 
@@ -88,29 +240,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // Close sidebar when clicking outside
-
-    document.addEventListener("click", function (event) {
-
-        if (!sidebar || !menuBtn) return;
-
-        if (
-            sidebar.classList.contains("active") &&
-            !sidebar.contains(event.target) &&
-            !menuBtn.contains(event.target)
-        ) {
-
-            sidebar.classList.remove("active");
-
-        }
-
-    });
-
-
-
-    // ========================================================
+    // =====================================================
     // PROFILE DROPDOWN
-    // ========================================================
+    // =====================================================
+
+    const profileBtn =
+        document.getElementById("profileBtn");
+
+    const profileMenu =
+        document.getElementById("profileMenu");
+
 
     if (profileBtn && profileMenu) {
 
@@ -132,65 +271,162 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-    }
 
-
-    document.addEventListener("click", function () {
-
-        if (profileMenu) {
+        document.addEventListener("click", function () {
 
             profileMenu.style.display = "none";
 
-        }
-
-    });
-
-
-
-    // ========================================================
-    // LOAD VALIDATION
-    // ========================================================
-
-    function getNumber(input) {
-
-        if (!input) return 0;
-
-        const value = parseFloat(input.value);
-
-        if (isNaN(value)) {
-
-            return 0;
-
-        }
-
-        return value;
+        });
 
     }
+
+
+    // =====================================================
+    // PRIORITY NOTIFICATION
+    // =====================================================
+
+    const checkScheduleBtn =
+        document.getElementById("checkScheduleBtn");
+
+    const priorityAlert =
+        document.getElementById("priorityAlert");
+
+
+    if (checkScheduleBtn) {
+
+        checkScheduleBtn.addEventListener(
+            "click",
+            function () {
+
+                if (priorityAlert) {
+
+                    priorityAlert.style.display =
+                        "none";
+
+                }
+
+                alert(
+                    "Latest HO curtailment schedule:\n\n" +
+                    "TRAS Down active — check AS schedule in WBES.\n\n" +
+                    "After TRAS Down Total Schedule for " +
+                    "13:45 - 14:00 = 241.21 MW"
+                );
+
+            }
+        );
+
+    }
+
+
+    // =====================================================
+    // CURTAILMENT ALARM
+    // =====================================================
+
+    const curtailmentAlarm =
+        document.getElementById("curtailmentAlarm");
+
+    const alarmMessage =
+        document.getElementById("alarmMessage");
+
+
+    function checkCurtailmentLimit() {
+
+        const solarInput =
+            document.getElementById("solarLoad");
+
+        const windInput =
+            document.getElementById("windLoad");
+
+
+        if (!solarInput || !windInput) {
+
+            return;
+
+        }
+
+
+        const solar =
+            parseFloat(solarInput.value) || 0;
+
+        const wind =
+            parseFloat(windInput.value) || 0;
+
+
+        const total =
+            solar + wind;
+
+
+        if (total > SCHEDULED_CURTAILMENT) {
+
+            if (curtailmentAlarm) {
+
+                curtailmentAlarm.classList.add("show");
+
+            }
+
+
+            if (alarmMessage) {
+
+                alarmMessage.innerHTML =
+                    "Solar + Wind load is " +
+                    total.toFixed(2) +
+                    " MW, which exceeds the scheduled " +
+                    "curtailment limit of " +
+                    SCHEDULED_CURTAILMENT.toFixed(2) +
+                    " MW.";
+
+            }
+
+        } else {
+
+            if (curtailmentAlarm) {
+
+                curtailmentAlarm.classList.remove("show");
+
+            }
+
+        }
+
+    }
+
+
+    // =====================================================
+    // LOAD VALIDATION
+    // =====================================================
+
+    const solarInput =
+        document.getElementById("solarLoad");
+
+    const windInput =
+        document.getElementById("windLoad");
+
+    const loadStatus =
+        document.getElementById("loadStatus");
 
 
     function validateSolar() {
 
-        if (!solarInput) return true;
-
-        const value = getNumber(solarInput);
-
-        if (value > SOLAR_MAX) {
-
-            solarInput.classList.add("input-error");
-
-            showLoadError(
-                "Solar load cannot exceed 191.40 MW."
-            );
+        if (!solarInput) {
 
             return false;
 
         }
 
+
+        const value =
+            parseFloat(solarInput.value);
+
+
+        if (isNaN(value)) {
+
+            return true;
+
+        }
+
+
         if (value < 0) {
 
-            solarInput.classList.add("input-error");
-
-            showLoadError(
+            solarInput.setCustomValidity(
                 "Solar load cannot be negative."
             );
 
@@ -198,7 +434,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-        solarInput.classList.remove("input-error");
+
+        if (value > MAX_SOLAR) {
+
+            solarInput.setCustomValidity(
+                "Maximum Solar load is 191.40 MW."
+            );
+
+            if (loadStatus) {
+
+                loadStatus.innerHTML =
+                    "⚠ Solar load cannot exceed 191.40 MW.";
+
+                loadStatus.style.color =
+                    "#d93025";
+
+            }
+
+            return false;
+
+        }
+
+
+        solarInput.setCustomValidity("");
 
         return true;
 
@@ -207,27 +465,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function validateWind() {
 
-        if (!windInput) return true;
-
-        const value = getNumber(windInput);
-
-        if (value > WIND_MAX) {
-
-            windInput.classList.add("input-error");
-
-            showLoadError(
-                "Wind load cannot exceed 204.75 MW."
-            );
+        if (!windInput) {
 
             return false;
 
         }
 
+
+        const value =
+            parseFloat(windInput.value);
+
+
+        if (isNaN(value)) {
+
+            return true;
+
+        }
+
+
         if (value < 0) {
 
-            windInput.classList.add("input-error");
-
-            showLoadError(
+            windInput.setCustomValidity(
                 "Wind load cannot be negative."
             );
 
@@ -235,123 +493,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-        windInput.classList.remove("input-error");
+
+        if (value > MAX_WIND) {
+
+            windInput.setCustomValidity(
+                "Maximum Wind load is 204.75 MW."
+            );
+
+            if (loadStatus) {
+
+                loadStatus.innerHTML =
+                    "⚠ Wind load cannot exceed 204.75 MW.";
+
+                loadStatus.style.color =
+                    "#d93025";
+
+            }
+
+            return false;
+
+        }
+
+
+        windInput.setCustomValidity("");
 
         return true;
 
     }
 
-
-
-    // ========================================================
-    // LOAD ERROR
-    // ========================================================
-
-    function showLoadError(message) {
-
-        if (!loadStatus) return;
-
-        loadStatus.innerHTML =
-            "⚠ " + message;
-
-        loadStatus.classList.add("error");
-
-    }
-
-
-    function clearLoadError() {
-
-        if (!loadStatus) return;
-
-        loadStatus.innerHTML = "";
-
-        loadStatus.classList.remove("error");
-
-    }
-
-
-
-    // ========================================================
-    // UPDATE CURTAILMENT SUMMARY
-    // ========================================================
-
-    function updateCurtailmentSummary() {
-
-        const solar = getNumber(solarInput);
-        const wind = getNumber(windInput);
-
-        const total = solar + wind;
-
-
-        if (summarySolar) {
-
-            summarySolar.textContent =
-                solar.toFixed(2) + " MW";
-
-        }
-
-
-        if (summaryWind) {
-
-            summaryWind.textContent =
-                wind.toFixed(2) + " MW";
-
-        }
-
-
-        checkCurtailmentAlarm(
-            solar,
-            wind,
-            total
-        );
-
-    }
-
-
-
-    // ========================================================
-    // CURTAILMENT ALARM
-    // ========================================================
-
-    function checkCurtailmentAlarm(
-        solar,
-        wind,
-        total
-    ) {
-
-        if (!curtailmentAlarm) return;
-
-
-        if (total > SCHEDULED_CURTAILMENT) {
-
-            curtailmentAlarm.classList.add("show");
-
-
-            if (alarmMessage) {
-
-                alarmMessage.textContent =
-                    "Solar + Wind load is " +
-                    total.toFixed(2) +
-                    " MW, which exceeds the scheduled " +
-                    "curtailment of " +
-                    SCHEDULED_CURTAILMENT.toFixed(2) +
-                    " MW.";
-
-            }
-
-        } else {
-
-            curtailmentAlarm.classList.remove("show");
-
-        }
-
-    }
-
-
-
-    // ========================================================
-    // REAL-TIME INPUT VALIDATION
-    // ========================================================
 
     if (solarInput) {
 
@@ -361,9 +530,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 validateSolar();
 
-                validateWind();
-
-                updateCurtailmentSummary();
+                checkCurtailmentLimit();
 
             }
         );
@@ -377,11 +544,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "input",
             function () {
 
-                validateSolar();
-
                 validateWind();
 
-                updateCurtailmentSummary();
+                checkCurtailmentLimit();
 
             }
         );
@@ -389,10 +554,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // =====================================================
+    // SUBMIT LOAD
+    // =====================================================
 
-    // ========================================================
-    // ENTER LOAD
-    // ========================================================
+    const submitLoadBtn =
+        document.getElementById("submitLoadBtn");
+
 
     if (submitLoadBtn) {
 
@@ -400,77 +568,173 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function () {
 
-                clearLoadError();
+                const solar =
+                    parseFloat(
+                        solarInput.value
+                    );
+
+                const wind =
+                    parseFloat(
+                        windInput.value
+                    );
 
 
-                const solarValid =
-                    validateSolar();
+                // -----------------------------------------
+                // Empty check
+                // -----------------------------------------
 
-                const windValid =
-                    validateWind();
+                if (
+                    solarInput.value === "" ||
+                    windInput.value === ""
+                ) {
 
+                    loadStatus.innerHTML =
+                        "⚠ Please enter both Solar and Wind load.";
 
-                if (!solarValid || !windValid) {
+                    loadStatus.style.color =
+                        "#d93025";
 
                     return;
 
                 }
 
 
-                const solar =
-                    getNumber(solarInput);
+                // -----------------------------------------
+                // Solar maximum
+                // -----------------------------------------
 
-                const wind =
-                    getNumber(windInput);
+                if (solar > MAX_SOLAR) {
+
+                    loadStatus.innerHTML =
+                        "⚠ Solar load cannot exceed 191.40 MW.";
+
+                    loadStatus.style.color =
+                        "#d93025";
+
+                    solarInput.focus();
+
+                    return;
+
+                }
+
+
+                // -----------------------------------------
+                // Wind maximum
+                // -----------------------------------------
+
+                if (wind > MAX_WIND) {
+
+                    loadStatus.innerHTML =
+                        "⚠ Wind load cannot exceed 204.75 MW.";
+
+                    loadStatus.style.color =
+                        "#d93025";
+
+                    windInput.focus();
+
+                    return;
+
+                }
+
+
+                // -----------------------------------------
+                // Negative values
+                // -----------------------------------------
+
+                if (
+                    solar < 0 ||
+                    wind < 0
+                ) {
+
+                    loadStatus.innerHTML =
+                        "⚠ Load cannot be negative.";
+
+                    loadStatus.style.color =
+                        "#d93025";
+
+                    return;
+
+                }
+
+
+                // -----------------------------------------
+                // Update summary
+                // -----------------------------------------
+
+                const summarySolar =
+                    document.getElementById(
+                        "summarySolar"
+                    );
+
+                const summaryWind =
+                    document.getElementById(
+                        "summaryWind"
+                    );
+
+
+                if (summarySolar) {
+
+                    summarySolar.innerHTML =
+                        solar.toFixed(2) + " MW";
+
+                }
+
+
+                if (summaryWind) {
+
+                    summaryWind.innerHTML =
+                        wind.toFixed(2) + " MW";
+
+                }
+
+
+                // -----------------------------------------
+                // Check total curtailment
+                // -----------------------------------------
 
                 const total =
                     solar + wind;
 
 
-                if (total > SCHEDULED_CURTAILMENT) {
-
-                    checkCurtailmentAlarm(
-                        solar,
-                        wind,
-                        total
-                    );
-
-                    return;
-
-                }
-
-
-                if (loadStatus) {
+                if (
+                    total > SCHEDULED_CURTAILMENT
+                ) {
 
                     loadStatus.innerHTML =
-                        "✓ Load successfully recorded: " +
-                        solar.toFixed(2) +
-                        " MW Solar + " +
-                        wind.toFixed(2) +
-                        " MW Wind = " +
-                        total.toFixed(2) +
-                        " MW";
+                        "⚠ Load entered, but Solar + Wind " +
+                        "exceeds scheduled curtailment.";
 
-                    loadStatus.classList.remove(
-                        "error"
-                    );
+                    loadStatus.style.color =
+                        "#d93025";
 
-                    loadStatus.classList.add(
-                        "success"
-                    );
+                } else {
+
+                    loadStatus.innerHTML =
+                        "✓ Load successfully recorded for " +
+                        "13:45 - 14:00.";
+
+                    loadStatus.style.color =
+                        "#27A5AD";
 
                 }
 
 
+                // -----------------------------------------
+                // Save demo data
+                // -----------------------------------------
+
                 localStorage.setItem(
-                    "solarLoad",
+                    "forecastSolarLoad",
                     solar
                 );
 
                 localStorage.setItem(
-                    "windLoad",
+                    "forecastWindLoad",
                     wind
                 );
+
+
+                checkCurtailmentLimit();
 
             }
         );
@@ -478,12 +742,344 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // =====================================================
+    // RESTORE SAVED LOAD
+    // =====================================================
 
-    // ========================================================
-    // UPLOAD SITE PHOTO
-    // ========================================================
+    const savedSolar =
+        localStorage.getItem(
+            "forecastSolarLoad"
+        );
 
-    if (uploadPhotoBtn && sitePhotoInput) {
+    const savedWind =
+        localStorage.getItem(
+            "forecastWindLoad"
+        );
+
+
+    if (
+        savedSolar &&
+        solarInput
+    ) {
+
+        solarInput.value =
+            savedSolar;
+
+    }
+
+
+    if (
+        savedWind &&
+        windInput
+    ) {
+
+        windInput.value =
+            savedWind;
+
+    }
+
+
+    if (
+        savedSolar ||
+        savedWind
+    ) {
+
+        const summarySolar =
+            document.getElementById(
+                "summarySolar"
+            );
+
+        const summaryWind =
+            document.getElementById(
+                "summaryWind"
+            );
+
+
+        if (
+            savedSolar &&
+            summarySolar
+        ) {
+
+            summarySolar.innerHTML =
+                Number(savedSolar).toFixed(2) +
+                " MW";
+
+        }
+
+
+        if (
+            savedWind &&
+            summaryWind
+        ) {
+
+            summaryWind.innerHTML =
+                Number(savedWind).toFixed(2) +
+                " MW";
+
+        }
+
+    }
+
+
+    checkCurtailmentLimit();
+
+
+    // =====================================================
+    // TAG HEAD OFFICE
+    // =====================================================
+
+    const tagHOBtn =
+        document.getElementById("tagHOBtn");
+
+    const tagModal =
+        document.getElementById("tagModal");
+
+    const closeTagModal =
+        document.getElementById("closeTagModal");
+
+    const sendHOMsg =
+        document.getElementById("sendHOMsg");
+
+
+    if (tagHOBtn && tagModal) {
+
+        tagHOBtn.addEventListener(
+            "click",
+            function () {
+
+                tagModal.classList.add("show");
+
+            }
+        );
+
+    }
+
+
+    if (closeTagModal) {
+
+        closeTagModal.addEventListener(
+            "click",
+            function () {
+
+                tagModal.classList.remove("show");
+
+            }
+        );
+
+    }
+
+
+    if (sendHOMsg) {
+
+        sendHOMsg.addEventListener(
+            "click",
+            function () {
+
+                const contact =
+                    document.getElementById(
+                        "hoContact"
+                    ).value;
+
+                const message =
+                    document.getElementById(
+                        "hoMessage"
+                    ).value.trim();
+
+                const status =
+                    document.getElementById(
+                        "hoStatus"
+                    );
+
+
+                if (contact === "") {
+
+                    status.innerHTML =
+                        "⚠ Please select a Head Office contact.";
+
+                    status.style.color =
+                        "#d93025";
+
+                    return;
+
+                }
+
+
+                if (message === "") {
+
+                    status.innerHTML =
+                        "⚠ Please enter a message.";
+
+                    status.style.color =
+                        "#d93025";
+
+                    return;
+
+                }
+
+
+                status.innerHTML =
+                    "✓ Notification sent to Head Office.";
+
+                status.style.color =
+                    "#27A5AD";
+
+            }
+        );
+
+    }
+
+
+    // =====================================================
+    // CHAT
+    // =====================================================
+
+    const chatHOBtn =
+        document.getElementById("chatHOBtn");
+
+    const chatModal =
+        document.getElementById("chatModal");
+
+    const closeChatModal =
+        document.getElementById(
+            "closeChatModal"
+        );
+
+    const sendChatBtn =
+        document.getElementById(
+            "sendChatBtn"
+        );
+
+    const chatMessage =
+        document.getElementById(
+            "chatMessage"
+        );
+
+    const chatWindow =
+        document.getElementById(
+            "chatWindow"
+        );
+
+
+    if (chatHOBtn) {
+
+        chatHOBtn.addEventListener(
+            "click",
+            function () {
+
+                chatModal.classList.add("show");
+
+            }
+        );
+
+    }
+
+
+    if (closeChatModal) {
+
+        closeChatModal.addEventListener(
+            "click",
+            function () {
+
+                chatModal.classList.remove("show");
+
+            }
+        );
+
+    }
+
+
+    function sendChatMessage() {
+
+        const message =
+            chatMessage.value.trim();
+
+
+        if (message === "") {
+
+            return;
+
+        }
+
+
+        const box =
+            document.createElement("div");
+
+
+        box.className =
+            "chat-message sent";
+
+
+        box.innerHTML =
+            "<strong>Site Team</strong>" +
+            "<p>" +
+            escapeHTML(message) +
+            "</p>" +
+            "<span>Now</span>";
+
+
+        chatWindow.appendChild(box);
+
+
+        chatMessage.value = "";
+
+
+        chatWindow.scrollTop =
+            chatWindow.scrollHeight;
+
+    }
+
+
+    if (sendChatBtn) {
+
+        sendChatBtn.addEventListener(
+            "click",
+            sendChatMessage
+        );
+
+    }
+
+
+    if (chatMessage) {
+
+        chatMessage.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Enter") {
+
+                    event.preventDefault();
+
+                    sendChatMessage();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // =====================================================
+    // PHOTO UPLOAD
+    // =====================================================
+
+    const uploadPhotoBtn =
+        document.getElementById(
+            "uploadPhotoBtn"
+        );
+
+    const sitePhotoInput =
+        document.getElementById(
+            "sitePhotoInput"
+        );
+
+    const selectedPhotoName =
+        document.getElementById(
+            "selectedPhotoName"
+        );
+
+
+    if (uploadPhotoBtn) {
 
         uploadPhotoBtn.addEventListener(
             "click",
@@ -534,34 +1130,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (selectedPhotoName) {
 
-                    selectedPhotoName.textContent =
+                    selectedPhotoName.innerHTML =
+                        "Selected: " +
                         file.name;
 
                 }
 
 
-                /*
-                 * Display uploaded image
-                 * in the latest weather slot.
-                 */
+                // Show uploaded photo
 
-                const reader =
-                    new FileReader();
+                const placeholder =
+                    document.getElementById(
+                        "photoPlaceholder1300"
+                    );
 
 
-                reader.onload =
-                    function (event) {
+                if (placeholder) {
 
-                        displayWeatherPhoto(
-                            "photoPlaceholder1345",
-                            event.target.result,
-                            file.name
+                    const imageURL =
+                        URL.createObjectURL(file);
+
+
+                    placeholder.innerHTML = "";
+
+
+                    const img =
+                        document.createElement(
+                            "img"
                         );
 
-                    };
+
+                    img.src =
+                        imageURL;
+
+                    img.alt =
+                        "Uploaded site weather photograph";
+
+                    img.style.width =
+                        "100%";
+
+                    img.style.height =
+                        "100%";
+
+                    img.style.objectFit =
+                        "cover";
+
+                    img.style.borderRadius =
+                        "7px";
 
 
-                reader.readAsDataURL(file);
+                    placeholder.appendChild(img);
+
+                }
 
             }
         );
@@ -569,110 +1189,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // =====================================================
+    // WEATHER REPORTS
+    // =====================================================
 
-    // ========================================================
-    // DISPLAY WEATHER PHOTO
-    // ========================================================
-
-    function displayWeatherPhoto(
-        containerId,
-        imageSource,
-        fileName
-    ) {
-
-        const container =
-            document.getElementById(containerId);
+    setupWeatherSubmission(
+        "sendWeather1315",
+        "comment1315",
+        "status1315",
+        "13:15 - 13:30"
+    );
 
 
-        if (!container) return;
+    setupWeatherSubmission(
+        "sendWeather1300",
+        "comment1300",
+        "status1300",
+        "13:00 - 13:15"
+    );
 
 
-        container.innerHTML = "";
-
-
-        const image =
-            document.createElement("img");
-
-
-        image.src = imageSource;
-
-        image.alt =
-            "Site weather photograph";
-
-
-        image.className =
-            "weather-photo";
-
-
-        container.appendChild(image);
-
-
-        container.dataset.fileName =
-            fileName;
-
-    }
-
-
-
-    // ========================================================
-    // LOAD EXISTING WEATHER PHOTO
-    //
-    // Your weather-site-1315.jpg is in the SAME folder
-    // as forecasting.html.
-    // ========================================================
-
-    const photo1315 =
-        document.getElementById(
-            "photoPlaceholder1315"
-        );
-
-
-    if (photo1315) {
-
-        photo1315.innerHTML = "";
-
-
-        const existingImage =
-            document.createElement("img");
-
-
-        existingImage.src =
-            "weather-site-1315.jpg";
-
-
-        existingImage.alt =
-            "Site weather photograph - 13:15 to 13:30";
-
-
-        existingImage.className =
-            "weather-photo";
-
-
-        existingImage.onerror =
-            function () {
-
-                photo1315.innerHTML =
-                    '<div class="photo-placeholder">' +
-                    '<div class="photo-icon">📷</div>' +
-                    '<span>Unable to load weather-site-1315.jpg</span>' +
-                    '</div>';
-
-            };
-
-
-        photo1315.appendChild(
-            existingImage
-        );
-
-    }
-
-
-
-    // ========================================================
-    // WEATHER PHOTO COMMENTS
-    // ========================================================
-
-    function setupWeatherSend(
+    function setupWeatherSubmission(
         buttonId,
         commentId,
         statusId,
@@ -689,63 +1226,47 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById(statusId);
 
 
-        if (!button) return;
+        if (!button) {
+
+            return;
+
+        }
 
 
         button.addEventListener(
             "click",
             function () {
 
-
-                const commentText =
+                const text =
                     comment
                     ? comment.value.trim()
                     : "";
 
 
-                if (
-                    commentText === ""
-                ) {
+                if (text === "") {
 
-                    if (status) {
+                    status.innerHTML =
+                        "⚠ Please add a comment before sending.";
 
-                        status.textContent =
-                            "⚠ Please add a comment before sending.";
-
-                        status.className =
-                            "weather-status error";
-
-                    }
+                    status.style.color =
+                        "#d93025";
 
                     return;
 
                 }
 
 
-                if (status) {
+                status.innerHTML =
+                    "✓ Weather report submitted for " +
+                    interval;
 
-                    status.textContent =
-                        "✓ Weather photo and comment " +
-                        "sent for " +
-                        interval +
-                        ".";
+                status.style.color =
+                    "#27A5AD";
 
-                    status.className =
-                        "weather-status success";
-
-                }
-
-
-                /*
-                 * Demo storage.
-                 * In the final connected version,
-                 * this will send the information
-                 * to the backend/database.
-                 */
 
                 localStorage.setItem(
                     "weatherComment_" + interval,
-                    commentText
+                    text
                 );
 
             }
@@ -754,306 +1275,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
-    // ========================================================
-    // INITIALISE WEATHER PHOTO SEND BUTTONS
-    // ========================================================
-
-    setupWeatherSend(
-        "sendWeather1345",
-        "comment1345",
-        "status1345",
-        "13:45 - 14:00"
-    );
-
-
-    setupWeatherSend(
-        "sendWeather1330",
-        "comment1330",
-        "status1330",
-        "13:30 - 13:45"
-    );
-
-
-    setupWeatherSend(
-        "sendWeather1315",
-        "comment1315",
-        "status1315",
-        "13:15 - 13:30"
-    );
-
-
-    setupWeatherSend(
-        "sendWeather1300",
-        "comment1300",
-        "status1300",
-        "13:00 - 13:15"
-    );
-
-
-
-    // ========================================================
-    // TAG HEAD OFFICE
-    // ========================================================
-
-    if (tagHOBtn && tagModal) {
-
-        tagHOBtn.addEventListener(
-            "click",
-            function () {
-
-                tagModal.classList.add("show");
-
-            }
-        );
-
-    }
-
-
-    if (closeTagModal && tagModal) {
-
-        closeTagModal.addEventListener(
-            "click",
-            function () {
-
-                tagModal.classList.remove(
-                    "show"
-                );
-
-            }
-        );
-
-    }
-
-
-
-    // ========================================================
-    // SEND HEAD OFFICE NOTIFICATION
-    // ========================================================
-
-    if (sendHOMsg) {
-
-        sendHOMsg.addEventListener(
-            "click",
-            function () {
-
-                const contact =
-                    document.getElementById(
-                        "hoContact"
-                    ).value;
-
-                const message =
-                    document.getElementById(
-                        "hoMessage"
-                    ).value.trim();
-
-
-                if (!contact) {
-
-                    if (hoStatus) {
-
-                        hoStatus.textContent =
-                            "⚠ Please select a Head Office team.";
-
-                    }
-
-                    return;
-
-                }
-
-
-                if (!message) {
-
-                    if (hoStatus) {
-
-                        hoStatus.textContent =
-                            "⚠ Please enter a message.";
-
-                    }
-
-                    return;
-
-                }
-
-
-                if (hoStatus) {
-
-                    hoStatus.textContent =
-                        "✓ Notification sent to Head Office.";
-
-                    hoStatus.className =
-                        "modal-status success";
-
-                }
-
-
-                document.getElementById(
-                    "hoMessage"
-                ).value = "";
-
-
-                setTimeout(
-                    function () {
-
-                        if (tagModal) {
-
-                            tagModal.classList.remove(
-                                "show"
-                            );
-
-                        }
-
-                    },
-                    1200
-                );
-
-            }
-        );
-
-    }
-
-
-
-    // ========================================================
-    // HEAD OFFICE CHAT
-    // ========================================================
-
-    if (chatHOBtn && chatModal) {
-
-        chatHOBtn.addEventListener(
-            "click",
-            function () {
-
-                chatModal.classList.add("show");
-
-                if (chatMessage) {
-
-                    chatMessage.focus();
-
-                }
-
-            }
-        );
-
-    }
-
-
-    if (closeChatModal && chatModal) {
-
-        closeChatModal.addEventListener(
-            "click",
-            function () {
-
-                chatModal.classList.remove(
-                    "show"
-                );
-
-            }
-        );
-
-    }
-
-
-
-    // ========================================================
-    // SEND CHAT MESSAGE
-    // ========================================================
-
-    function sendChatMessage() {
-
-        if (!chatMessage || !chatWindow) {
-            return;
-        }
-
-
-        const message =
-            chatMessage.value.trim();
-
-
-        if (message === "") {
-            return;
-        }
-
-
-        const messageBox =
-            document.createElement("div");
-
-
-        messageBox.className =
-            "chat-message sent";
-
-
-        const currentTime =
-            new Date().toLocaleTimeString(
-                [],
-                {
-                    hour: "2-digit",
-                    minute: "2-digit"
-                }
-            );
-
-
-        messageBox.innerHTML =
-            "<strong>Site Team</strong>" +
-            "<p>" +
-            escapeHTML(message) +
-            "</p>" +
-            "<span>" +
-            currentTime +
-            "</span>";
-
-
-        chatWindow.appendChild(
-            messageBox
-        );
-
-
-        chatMessage.value = "";
-
-
-        chatWindow.scrollTop =
-            chatWindow.scrollHeight;
-
-    }
-
-
-    if (sendChatBtn) {
-
-        sendChatBtn.addEventListener(
-            "click",
-            sendChatMessage
-        );
-
-    }
-
-
-    if (chatMessage) {
-
-        chatMessage.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Enter" &&
-                    !event.shiftKey
-                ) {
-
-                    event.preventDefault();
-
-                    sendChatMessage();
-
-                }
-
-            }
-        );
-
-    }
-
-
-
-    // ========================================================
-    // CLOSE MODALS WHEN CLICKING OUTSIDE
-    // ========================================================
+    // =====================================================
+    // CLOSE MODALS
+    // =====================================================
 
     window.addEventListener(
         "click",
@@ -1063,9 +1287,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.target === tagModal
             ) {
 
-                tagModal.classList.remove(
-                    "show"
-                );
+                tagModal.classList.remove("show");
 
             }
 
@@ -1074,9 +1296,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.target === chatModal
             ) {
 
-                chatModal.classList.remove(
-                    "show"
-                );
+                chatModal.classList.remove("show");
 
             }
 
@@ -1084,108 +1304,54 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
+    // =====================================================
+    // ESC KEY
+    // =====================================================
 
-    // ========================================================
-    // SCHEDULE BUTTONS
-    // ========================================================
+    document.addEventListener(
+        "keydown",
+        function (event) {
 
-    const scheduleButtons =
-        document.querySelectorAll(
-            "#checkScheduleBtn, #checkScheduleBtn2"
-        );
+            if (event.key === "Escape") {
 
+                if (tagModal) {
 
-    scheduleButtons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    alert(
-                        "AS Schedule: " +
-                        "TRAS Down Total Schedule " +
-                        "for 13:45 - 14:00 = " +
-                        "241.21 MW"
-                    );
+                    tagModal.classList.remove("show");
 
                 }
-            );
+
+                if (chatModal) {
+
+                    chatModal.classList.remove("show");
+
+                }
+
+                if (profileMenu) {
+
+                    profileMenu.style.display =
+                        "none";
+
+                }
+
+            }
 
         }
     );
 
 
+    // =====================================================
+    // HTML ESCAPE
+    // =====================================================
 
-    // ========================================================
-    // SECURITY / HTML ESCAPE
-    // ========================================================
+    function escapeHTML(value) {
 
-    function escapeHTML(text) {
-
-        const div =
-            document.createElement("div");
-
-        div.textContent = text;
-
-        return div.innerHTML;
-
-    }
-
-
-
-    // ========================================================
-    // RESTORE PREVIOUS LOAD
-    // ========================================================
-
-    const savedSolar =
-        localStorage.getItem("solarLoad");
-
-    const savedWind =
-        localStorage.getItem("windLoad");
-
-
-    if (
-        savedSolar !== null &&
-        solarInput
-    ) {
-
-        solarInput.value =
-            savedSolar;
+        return value
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
     }
-
-
-    if (
-        savedWind !== null &&
-        windInput
-    ) {
-
-        windInput.value =
-            savedWind;
-
-    }
-
-
-    updateCurtailmentSummary();
-
-
-
-    // ========================================================
-    // INITIALISE
-    // ========================================================
-
-    if (curtailmentAlarm) {
-
-        curtailmentAlarm.classList.remove(
-            "show"
-        );
-
-    }
-
-
-    console.log(
-        "Forecasting page loaded successfully."
-    );
 
 });
