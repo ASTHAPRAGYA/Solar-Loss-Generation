@@ -130,49 +130,58 @@ if (sendHOReply) {
 
 
 // =====================================================
-// CHECK LOW GENERATION
+// CHECK LOW GENERATION ALERT
 // =====================================================
 
 function checkLowGenerationAlert() {
 
-    const solarInput =
-        document.getElementById("solarLoad");
+    const solarInput = document.getElementById("solarLoad");
+    const windInput = document.getElementById("windLoad");
+    const badge = document.getElementById("hoChatBadge");
 
-    const windInput =
-        document.getElementById("windLoad");
-
-
-    if (!solarInput || !windInput) {
-
+    if (!solarInput || !windInput || !badge) {
         return;
-
     }
 
+    const solarValue = solarInput.value.trim();
+    const windValue = windInput.value.trim();
 
-    const solar =
-        parseFloat(solarInput.value) || 0;
+    // Do NOT trigger alert when fields are empty
+    if (solarValue === "" || windValue === "") {
 
-    const wind =
-        parseFloat(windInput.value) || 0;
+        badge.style.display = "none";
 
+        return;
+    }
 
-    const combinedLoad =
-        solar + wind;
+    const solar = parseFloat(solarValue);
+    const wind = parseFloat(windValue);
 
+    // Invalid values
+    if (isNaN(solar) || isNaN(wind)) {
 
-    // LOW GENERATION CONDITION
+        badge.style.display = "none";
+
+        return;
+    }
+
+    const combinedLoad = solar + wind;
+
+    // Show HO notification only when
+    // both values have been entered and
+    // combined load is below 70 MW
+
     if (combinedLoad < 70) {
 
-        hoChatBadge.style.display = "flex";
+        badge.style.display = "flex";
 
     } else {
 
-        hoChatBadge.style.display = "none";
+        badge.style.display = "none";
 
     }
 
 }
-
 
 // =====================================================
 // CHECK WHEN LOAD CHANGES
