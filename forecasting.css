@@ -1,12 +1,12 @@
-/* =========================================================
+/* ============================================================
    SOLAR GENERATION LOSS OPTIMIZER
    FORECASTING CSS
-   ========================================================= */
+   ============================================================ */
 
 
-/* =========================================================
+/* ============================================================
    GLOBAL
-   ========================================================= */
+   ============================================================ */
 
 * {
     box-sizing: border-box;
@@ -15,240 +15,392 @@
 }
 
 
+:root {
+    --brand: #27A5AD;
+    --brand-dark: #16878f;
+    --brand-light: #e9f8f9;
+
+    --background: #f5f7f8;
+    --card: #ffffff;
+
+    --text: #1f2933;
+    --muted: #6b7280;
+
+    --border: #dfe5e8;
+
+    --danger: #d93025;
+    --danger-light: #fff0ef;
+
+    --warning: #f59e0b;
+    --warning-light: #fff7e6;
+
+    --success: #18864b;
+    --success-light: #eaf8ef;
+
+    --shadow:
+        0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f8f9;
-    color: #263238;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
     min-height: 100vh;
 }
 
 
-/* =========================================================
-   TOP BAR
-   ========================================================= */
 
-.topbar {
-    height: 76px;
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 260px;
+    height: 100vh;
+
     background: #ffffff;
-    border-bottom: 1px solid #e1e8ea;
+
+    border-right: 1px solid var(--border);
+
+    z-index: 1000;
+
+    transform: translateX(-100%);
+
+    transition:
+        transform 0.3s ease;
+
+    box-shadow:
+        4px 0 20px rgba(0, 0, 0, 0.08);
+}
+
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+
+.sidebar-header {
+    height: 70px;
 
     display: flex;
+
     align-items: center;
-    justify-content: space-between;
 
-    padding: 0 32px;
+    padding: 0 24px;
 
-    position: sticky;
+    background: var(--brand);
+
+    color: white;
+}
+
+
+.sidebar-header h2 {
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+.sidebar-menu {
+    padding: 18px 10px;
+}
+
+
+.sidebar-menu a {
+    display: block;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    padding: 13px 16px;
+
+    margin-bottom: 4px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.sidebar-menu a:hover {
+    background: var(--brand-light);
+
+    color: var(--brand-dark);
+}
+
+
+.sidebar-menu a.active {
+    background: var(--brand);
+
+    color: white;
+}
+
+
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+
+.topbar {
+    position: fixed;
+
     top: 0;
-    z-index: 1000;
+    left: 0;
+    right: 0;
+
+    height: 70px;
+
+    background: white;
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    z-index: 900;
+
+    padding: 0 24px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+.menu-btn {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: var(--brand-light);
+
+    color: var(--brand-dark);
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    margin-right: 16px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.menu-btn:hover {
+    background: #d7f1f2;
+
+    transform: scale(1.05);
 }
 
 
 .page-title {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
+    font-size: 20px;
 
-
-.page-title h1 {
-    font-size: 24px;
     font-weight: 700;
-    color: #27A5AD;
+
+    flex: 1;
 }
 
 
-.page-title span {
-    font-size: 13px;
-    color: #78909c;
-}
+/* ============================================================
+   PROFILE
+   ============================================================ */
 
-
-.top-actions {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-
-/* =========================================================
-   TOP ACTION BUTTONS
-   ========================================================= */
-
-.notification-btn {
-    width: 42px;
-    height: 42px;
-
-    border: 1px solid #dce5e7;
-    background: #ffffff;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    font-size: 18px;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-.notification-btn:hover {
-    background: #eefafb;
-    transform: translateY(-1px);
+.profile-container {
+    position: relative;
 }
 
 
 .profile-btn {
-    border: none;
-    background: #27A5AD;
-    color: #ffffff;
+    border: 1px solid var(--border);
 
-    padding: 11px 18px;
+    background: white;
 
-    border-radius: 9px;
+    color: var(--text);
+
+    padding: 10px 14px;
+
+    border-radius: 8px;
 
     cursor: pointer;
 
     font-size: 14px;
-    font-weight: 600;
 
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
 }
 
 
 .profile-btn:hover {
-    background: #218e95;
-    transform: translateY(-1px);
+    border-color: var(--brand);
+
+    color: var(--brand-dark);
 }
 
 
-/* =========================================================
-   PROFILE DROPDOWN
-   ========================================================= */
-
 .profile-menu {
-    position: fixed;
+    position: absolute;
 
-    top: 67px;
-    right: 32px;
+    top: calc(100% + 8px);
 
-    width: 190px;
+    right: 0;
 
-    background: #ffffff;
+    width: 180px;
 
-    border: 1px solid #e0e7e9;
+    background: white;
 
-    border-radius: 10px;
+    border: 1px solid var(--border);
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    border-radius: 9px;
 
-    padding: 7px;
+    box-shadow: var(--shadow);
 
     display: none;
 
-    z-index: 2000;
+    overflow: hidden;
 }
 
 
-.profile-menu button {
-    width: 100%;
+.profile-menu a {
+    display: block;
 
-    border: none;
-    background: transparent;
+    padding: 12px 15px;
 
-    text-align: left;
+    text-decoration: none;
 
-    padding: 11px 12px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
+    color: var(--text);
 
     font-size: 14px;
-
-    color: #37474f;
 }
 
 
-.profile-menu button:hover {
-    background: #eefafb;
-    color: #27A5AD;
+.profile-menu a:hover {
+    background: var(--brand-light);
+
+    color: var(--brand-dark);
 }
 
 
-/* =========================================================
-   MAIN CONTAINER
-   ========================================================= */
 
-.forecasting-container {
-    width: min(1200px, calc(100% - 40px));
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
 
-    margin: 28px auto 70px;
+.main-content {
+    padding: 100px 30px 40px;
+
+    max-width: 1400px;
+
+    margin: auto;
 }
 
 
-/* =========================================================
+.page-heading {
+    margin-bottom: 25px;
+}
+
+
+.page-heading h1 {
+    font-size: 28px;
+
+    margin-bottom: 7px;
+}
+
+
+.page-heading p {
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+
+/* ============================================================
    PRIORITY NOTIFICATION
-   ========================================================= */
+   ============================================================ */
 
-.priority-notification {
+.priority-alert {
     display: flex;
 
     align-items: center;
 
-    gap: 14px;
+    gap: 15px;
 
-    background: #fff4e5;
+    background: var(--warning-light);
 
-    border: 1px solid #ffca78;
+    border: 1px solid #f5d38a;
 
-    border-left: 5px solid #f39c12;
+    border-left: 5px solid var(--warning);
+
+    padding: 16px 18px;
 
     border-radius: 10px;
 
-    padding: 14px 18px;
-
     margin-bottom: 20px;
 
-    animation: notificationSlide 0.3s ease;
+    animation:
+        notificationPulse 2s ease-in-out infinite;
+}
+
+
+@keyframes notificationPulse {
+
+    0%,
+    100% {
+        box-shadow: none;
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 4px rgba(245, 158, 11, 0.08);
+    }
 }
 
 
 .priority-icon {
-    width: 38px;
-    height: 38px;
-
-    border-radius: 50%;
-
-    background: #f39c12;
-    color: #ffffff;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 19px;
-    font-weight: bold;
+    font-size: 25px;
 }
 
 
-.priority-notification strong {
-    color: #9a5d00;
-
-    font-size: 13px;
-
-    letter-spacing: 0.4px;
+.priority-content {
+    flex: 1;
 }
 
 
-.priority-notification p {
-    margin-top: 4px;
+.priority-content strong {
+    display: block;
 
-    color: #6d4c1d;
+    margin-bottom: 4px;
+}
+
+
+.priority-content p {
+    color: #6b4a00;
 
     font-size: 13px;
 
@@ -256,7 +408,63 @@ body {
 }
 
 
-@keyframes notificationSlide {
+.priority-button {
+    border: none;
+
+    background: var(--warning);
+
+    color: white;
+
+    padding: 10px 15px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+
+.priority-button:hover {
+    background: #d98b00;
+}
+
+
+
+/* ============================================================
+   CURTAILMENT ALARM
+   ============================================================ */
+
+.curtailment-alarm {
+    display: none;
+
+    align-items: center;
+
+    gap: 15px;
+
+    background: var(--danger-light);
+
+    border: 1px solid #f2b8b5;
+
+    border-left: 5px solid var(--danger);
+
+    padding: 16px 18px;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+.curtailment-alarm.show {
+    display: flex;
+
+    animation:
+        alarmAppear 0.3s ease;
+}
+
+
+@keyframes alarmAppear {
 
     from {
         opacity: 0;
@@ -271,255 +479,262 @@ body {
 }
 
 
-/* =========================================================
-   GENERAL CARD
-   ========================================================= */
+.alarm-icon {
+    font-size: 25px;
+}
+
+
+.alarm-content strong {
+    display: block;
+
+    color: var(--danger);
+
+    margin-bottom: 4px;
+}
+
+
+.alarm-content p {
+    font-size: 13px;
+
+    color: #7f1d1d;
+}
+
+
+
+/* ============================================================
+   CARDS
+   ============================================================ */
 
 .forecast-card {
-    background: #ffffff;
+    background: var(--card);
 
-    border: 1px solid #e2e9eb;
+    border: 1px solid var(--border);
 
-    border-radius: 13px;
+    border-radius: 12px;
 
     padding: 24px;
 
     margin-bottom: 22px;
 
-    box-shadow:
-        0 3px 12px rgba(25, 60, 65, 0.04);
+    box-shadow: var(--shadow);
 }
 
-
-/* =========================================================
-   CARD HEADER
-   ========================================================= */
 
 .card-header {
     display: flex;
 
+    align-items: center;
+
     justify-content: space-between;
 
-    align-items: flex-start;
-
-    gap: 20px;
+    gap: 15px;
 
     margin-bottom: 20px;
 }
 
 
 .card-header h2 {
-    font-size: 18px;
+    font-size: 19px;
 
-    color: #263238;
-
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 
 .card-header p {
-    font-size: 13px;
+    color: var(--muted);
 
-    color: #78909c;
+    font-size: 13px;
+}
+
+
+.status-badge {
+    background: var(--success-light);
+
+    color: var(--success);
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+
+/* ============================================================
+   TRAS STATUS
+   ============================================================ */
+
+.tras-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    background: var(--brand-light);
+
+    color: var(--brand-dark);
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    margin-bottom: 18px;
+
+    font-size: 14px;
+}
+
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: var(--brand);
+
+    box-shadow:
+        0 0 0 4px rgba(39, 165, 173, 0.15);
+}
+
+
+
+/* ============================================================
+   SCHEDULE BOX
+   ============================================================ */
+
+.schedule-box {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    border: 1px solid var(--border);
+
+    background: #fafcfc;
+
+    padding: 17px;
+
+    border-radius: 9px;
+}
+
+
+.excel-icon {
+    flex-shrink: 0;
+}
+
+
+.excel-paper {
+    width: 46px;
+    height: 52px;
+
+    border-radius: 5px;
+
+    background: #18864b;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+
+.schedule-details {
+    flex: 1;
+}
+
+
+.schedule-label {
+    display: block;
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    margin-bottom: 5px;
+}
+
+
+.schedule-value {
+    font-size: 14px;
 
     line-height: 1.5;
 }
 
 
-.status-badge {
-    background: #e7f7f8;
-
-    color: #218e95;
-
-    border-radius: 20px;
-
-    padding: 6px 12px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.5px;
+.schedule-value strong {
+    color: var(--brand-dark);
 }
 
 
-.interval-badge {
-    background: #f0f7f8;
+.schedule-button {
+    border: none;
 
-    color: #27A5AD;
+    background: var(--brand);
 
-    border: 1px solid #d6edef;
+    color: white;
 
-    border-radius: 20px;
+    padding: 10px 15px;
 
-    padding: 7px 13px;
+    border-radius: 7px;
 
-    font-size: 12px;
-
-    font-weight: 600;
+    cursor: pointer;
 
     white-space: nowrap;
 }
 
 
-/* =========================================================
-   TRAS ALERT
-   ========================================================= */
-
-.tras-alert {
-    background: #eefafb;
-
-    border-left: 4px solid #27A5AD;
-
-    border-radius: 7px;
-
-    padding: 13px 15px;
-
-    margin-bottom: 18px;
-
-    color: #176d73;
-
-    font-size: 14px;
+.schedule-button:hover {
+    background: var(--brand-dark);
 }
 
 
-.tras-alert strong {
-    font-weight: 600;
-}
 
-
-/* =========================================================
-   SCHEDULE ROW
-   ========================================================= */
-
-.schedule-row {
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    background: #fafcfc;
-
-    border: 1px solid #e6edef;
-
-    border-radius: 9px;
-
-    padding: 15px;
-
-    margin-bottom: 18px;
-}
-
-
-.excel-btn {
-    flex-shrink: 0;
-
-    border: 1px solid #b9dfe2;
-
-    background: #ffffff;
-
-    color: #237f85;
-
-    border-radius: 8px;
-
-    padding: 9px 13px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    transition: all 0.2s ease;
-}
-
-
-.excel-btn:hover {
-    background: #eaf8f9;
-
-    border-color: #27A5AD;
-
-    transform: translateY(-1px);
-}
-
-
-.excel-icon {
-    font-size: 17px;
-}
-
-
-.schedule-text {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 4px;
-
-    font-size: 13px;
-
-    color: #546e7a;
-}
-
-
-.schedule-text strong {
-    color: #37474f;
-}
-
-
-.schedule-text b {
-    color: #27A5AD;
-}
-
-
-/* =========================================================
+/* ============================================================
    CONTACT
-   ========================================================= */
+   ============================================================ */
 
-.contact-box {
+.contact-row {
     display: flex;
+
+    justify-content: space-between;
 
     align-items: center;
 
-    gap: 12px;
-
-    padding: 12px 0;
-
-    border-top: 1px solid #edf1f2;
-}
-
-
-.contact-box strong {
-    font-size: 13px;
-
-    color: #546e7a;
-}
-
-
-.contact-box a {
-    color: #27A5AD;
-
-    text-decoration: none;
-
-    font-weight: 700;
+    padding: 15px 2px 8px;
 
     font-size: 14px;
 }
 
 
-.contact-box a:hover {
-    text-decoration: underline;
+.contact-row span {
+    color: var(--muted);
 }
 
 
-/* =========================================================
-   HO ACTIONS
-   ========================================================= */
+.contact-row strong {
+    color: var(--brand-dark);
+}
+
+
+
+/* ============================================================
+   HEAD OFFICE ACTIONS
+   ============================================================ */
 
 .ho-actions {
     display: flex;
@@ -530,294 +745,58 @@ body {
 }
 
 
-.ho-actions button {
-    border: 1px solid #d5e5e7;
+.secondary-button {
+    border: 1px solid var(--brand);
 
-    background: #ffffff;
+    background: white;
 
-    color: #42656a;
-
-    padding: 9px 13px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    transition: all 0.2s ease;
-}
-
-
-.ho-actions button:hover {
-    border-color: #27A5AD;
-
-    color: #27A5AD;
-
-    background: #f2fbfb;
-}
-
-
-/* =========================================================
-   TAG BOX
-   ========================================================= */
-
-.tag-box {
-    margin-top: 14px;
-
-    padding: 15px;
-
-    background: #f8fbfb;
-
-    border: 1px solid #e0ebed;
-
-    border-radius: 9px;
-}
-
-
-.tag-box label {
-    display: block;
-
-    font-size: 12px;
-
-    color: #607d8b;
-
-    margin-bottom: 6px;
-}
-
-
-.tag-box select {
-    width: 100%;
-
-    max-width: 350px;
-
-    padding: 10px;
-
-    border: 1px solid #cfdde0;
-
-    border-radius: 7px;
-
-    background: #ffffff;
-
-    font-size: 13px;
-}
-
-
-.tag-box button {
-    margin-top: 10px;
-
-    background: #27A5AD;
-
-    color: #ffffff;
-
-    border: none;
-
-    border-radius: 7px;
+    color: var(--brand-dark);
 
     padding: 9px 14px;
 
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   LOAD TABLE
-   ========================================================= */
-
-.load-table {
-    width: 100%;
-
-    border: 1px solid #e1e9eb;
-
-    border-radius: 9px;
-
-    overflow: hidden;
-}
-
-
-.load-row {
-    display: grid;
-
-    grid-template-columns:
-        1.2fr
-        1.5fr
-        1fr;
-
-    align-items: center;
-
-    min-height: 70px;
-
-    border-bottom: 1px solid #edf1f2;
-}
-
-
-.load-row:last-child {
-    border-bottom: none;
-}
-
-
-.load-row > div {
-    padding: 12px 16px;
-}
-
-
-.load-heading {
-    min-height: 45px;
-
-    background: #f4f8f9;
-
-    color: #607d8b;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.3px;
-}
-
-
-.load-heading > div {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-
-.load-row strong {
-    color: #37474f;
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   LOAD INPUT
-   ========================================================= */
-
-.load-row input {
-    width: 100%;
-
-    max-width: 240px;
-
-    padding: 10px 11px;
-
-    border: 1px solid #ccdadd;
-
     border-radius: 7px;
 
-    outline: none;
-
-    font-size: 13px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.load-row input:focus {
-    border-color: #27A5AD;
-
-    box-shadow:
-        0 0 0 3px rgba(39, 165, 173, 0.10);
-}
-
-
-.load-row input.input-invalid {
-    border-color: #e74c3c;
-
-    background: #fff8f7;
-}
-
-
-.input-error {
-    display: block;
-
-    color: #e74c3c;
-
-    font-size: 11px;
-
-    margin-top: 5px;
-
-    min-height: 14px;
-}
-
-
-/* =========================================================
-   ENTER LOAD BUTTON
-   ========================================================= */
-
-.enter-load-btn {
-    margin-top: 17px;
-
-    background: #27A5AD;
-
-    color: #ffffff;
-
-    border: none;
-
-    border-radius: 8px;
-
-    padding: 11px 22px;
-
     cursor: pointer;
 
     font-size: 13px;
-
-    font-weight: 600;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
 }
 
 
-.enter-load-btn:hover {
-    background: #218e95;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 5px 14px rgba(39, 165, 173, 0.18);
+.secondary-button:hover {
+    background: var(--brand-light);
 }
 
 
-.enter-load-btn:active {
-    transform: translateY(0);
-}
 
-
-/* =========================================================
-   SUMMARY GRID
-   ========================================================= */
+/* ============================================================
+   SUMMARY
+   ============================================================ */
 
 .summary-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(4, 1fr);
+        repeat(3, 1fr);
 
-    gap: 12px;
+    gap: 15px;
 }
 
 
 .summary-item {
-    background: #f8fbfb;
-
-    border: 1px solid #e2ecee;
+    border: 1px solid var(--border);
 
     border-radius: 9px;
 
-    padding: 17px;
+    padding: 16px;
+
+    background: #fafcfc;
 }
 
 
 .summary-item span {
     display: block;
 
-    color: #78909c;
+    color: var(--muted);
 
     font-size: 12px;
 
@@ -826,149 +805,253 @@ body {
 
 
 .summary-item strong {
-    color: #37474f;
+    font-size: 21px;
 
-    font-size: 18px;
+    color: var(--brand-dark);
 }
 
 
-.summary-item.total {
-    background: #eefafb;
 
-    border-color: #cce9eb;
+/* ============================================================
+   LOAD TABLE
+   ============================================================ */
+
+.interval-heading {
+    display: inline-block;
+
+    background: var(--brand-light);
+
+    color: var(--brand-dark);
+
+    padding: 9px 13px;
+
+    border-radius: 7px;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
 }
 
 
-.summary-item.total strong {
-    color: #218e95;
+.load-table-wrapper {
+    overflow-x: auto;
 }
 
 
-/* =========================================================
-   LOAD ALARM
-   ========================================================= */
+.load-table {
+    width: 100%;
 
-.load-alarm {
-    align-items: center;
-
-    gap: 13px;
-
-    margin-top: 18px;
-
-    padding: 14px 16px;
-
-    background: #fff1f0;
-
-    border: 1px solid #f2b8b5;
-
-    border-left: 5px solid #e74c3c;
-
-    border-radius: 9px;
-
-    color: #a93226;
-
-    animation: alarmPulse 1.8s infinite;
+    border-collapse: collapse;
 }
 
 
-.load-alarm > div {
-    display: flex;
+.load-table th,
+.load-table td {
+    padding: 13px;
 
-    flex-direction: column;
+    border-bottom: 1px solid var(--border);
 
-    gap: 3px;
+    text-align: left;
+
+    font-size: 14px;
 }
 
 
-.load-alarm strong {
+.load-table th {
+    background: #f7f9fa;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+}
+
+
+.load-table td:first-child {
+    font-weight: 600;
+}
+
+
+.load-table input {
+    width: 180px;
+
+    padding: 10px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+
+.load-table input:focus {
+    border-color: var(--brand);
+
+    box-shadow:
+        0 0 0 3px rgba(39, 165, 173, 0.12);
+}
+
+
+.load-table input.input-error {
+    border-color: var(--danger);
+
+    background: var(--danger-light);
+
+    animation:
+        inputShake 0.25s ease;
+}
+
+
+@keyframes inputShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+
+}
+
+
+
+/* ============================================================
+   LOAD STATUS
+   ============================================================ */
+
+.load-status {
+    min-height: 25px;
+
+    margin: 14px 0;
+
     font-size: 13px;
 }
 
 
-.load-alarm p {
-    font-size: 12px;
+.load-status.error {
+    color: var(--danger);
 
-    color: #8d4a44;
+    font-weight: 600;
 }
 
 
-@keyframes alarmPulse {
+.load-status.success {
+    color: var(--success);
 
-    0% {
-        box-shadow: 0 0 0 rgba(231, 76, 60, 0);
-    }
-
-    50% {
-        box-shadow:
-            0 0 0 5px rgba(231, 76, 60, 0.08);
-    }
-
-    100% {
-        box-shadow: 0 0 0 rgba(231, 76, 60, 0);
-    }
-
+    font-weight: 600;
 }
 
 
-/* =========================================================
-   WEATHER GALLERY
-   ========================================================= */
 
-.weather-gallery {
+/* ============================================================
+   PRIMARY BUTTON
+   ============================================================ */
+
+.primary-button {
+    border: none;
+
+    background: var(--brand);
+
+    color: white;
+
+    padding: 11px 19px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.primary-button:hover {
+    background: var(--brand-dark);
+
+    transform: translateY(-1px);
+}
+
+
+
+/* ============================================================
+   WEATHER PHOTO GRID
+   ============================================================ */
+
+.weather-photo-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(2, 1fr);
 
-    gap: 18px;
+    gap: 20px;
 }
 
 
-.weather-photo-card {
-    border: 1px solid #e1e9eb;
+.weather-slot {
+    border: 1px solid var(--border);
 
     border-radius: 10px;
 
     overflow: hidden;
 
-    background: #ffffff;
+    background: #fafcfc;
 }
 
 
-.photo-header {
-    padding: 12px 14px;
+.weather-slot-header {
+    display: flex;
 
-    background: #f5f9fa;
+    justify-content: space-between;
 
-    border-bottom: 1px solid #e5edef;
+    align-items: center;
 
-    color: #455a64;
+    padding: 13px 15px;
+
+    background: #f4f8f8;
+
+    border-bottom: 1px solid var(--border);
 
     font-size: 13px;
 }
 
 
-.weather-photo {
-    display: block;
+.weather-slot-header span {
+    font-size: 11px;
 
-    width: 100%;
+    color: var(--muted);
 
-    height: 260px;
+    background: white;
 
-    object-fit: cover;
+    padding: 5px 8px;
 
-    background: #eef3f4;
+    border-radius: 12px;
 }
 
 
-/* =========================================================
-   NO PHOTO
-   ========================================================= */
 
-.no-photo {
-    height: 260px;
+/* ============================================================
+   PHOTO CONTAINER
+   ============================================================ */
 
-    background: #f4f7f8;
+.photo-container {
+    height: 230px;
+
+    background: #eef2f3;
 
     display: flex;
 
@@ -976,87 +1059,97 @@ body {
 
     justify-content: center;
 
+    overflow: hidden;
+}
+
+
+.photo-placeholder {
+    display: flex;
+
     flex-direction: column;
 
-    gap: 9px;
+    align-items: center;
 
-    color: #90a4ae;
+    justify-content: center;
 
-    font-size: 14px;
+    gap: 10px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    text-align: center;
+
+    padding: 20px;
 }
 
 
-.no-photo:first-letter {
-    font-size: 30px;
+.photo-icon {
+    font-size: 38px;
+
+    opacity: 0.65;
 }
 
 
-/* =========================================================
-   PHOTO COMMENTS
-   ========================================================= */
-
-.photo-comment {
-    padding: 13px;
-}
-
-
-.photo-comment label,
-.upload-comment label {
-    display: block;
-
-    font-size: 12px;
-
-    color: #607d8b;
-
-    margin-bottom: 6px;
-}
-
-
-.photo-comment textarea,
-.upload-comment textarea,
-.ho-reply-area textarea {
+.weather-photo {
     width: 100%;
 
-    min-height: 70px;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+
+/* ============================================================
+   PHOTO COMMENTS
+   ============================================================ */
+
+.photo-comment {
+    display: block;
+
+    width: calc(100% - 24px);
+
+    margin: 12px;
+
+    min-height: 75px;
 
     resize: vertical;
 
-    padding: 9px 10px;
+    padding: 10px;
 
-    border: 1px solid #d2dfe1;
+    border: 1px solid var(--border);
 
     border-radius: 7px;
 
     font-family: inherit;
 
-    font-size: 12px;
+    font-size: 13px;
 
     outline: none;
 }
 
 
-.photo-comment textarea:focus,
-.upload-comment textarea:focus,
-.ho-reply-area textarea:focus {
-    border-color: #27A5AD;
+.photo-comment:focus {
+    border-color: var(--brand);
 
     box-shadow:
-        0 0 0 3px rgba(39, 165, 173, 0.08);
+        0 0 0 3px rgba(39, 165, 173, 0.1);
 }
 
 
-.send-photo-comment {
-    margin:
-        0 13px
-        13px;
+.photo-send-button {
+    margin: 0 12px 12px;
 
-    padding: 8px 12px;
+    border: 1px solid var(--brand);
 
-    border: 1px solid #cde5e7;
+    background: white;
 
-    background: #f4fbfb;
+    color: var(--brand-dark);
 
-    color: #237f85;
+    padding: 9px 13px;
 
     border-radius: 7px;
 
@@ -1068,16 +1161,36 @@ body {
 }
 
 
-.send-photo-comment:hover {
-    background: #e7f7f8;
-
-    border-color: #27A5AD;
+.photo-send-button:hover {
+    background: var(--brand-light);
 }
 
 
-/* =========================================================
-   PHOTO UPLOAD
-   ========================================================= */
+.weather-status {
+    padding: 0 12px 12px;
+
+    font-size: 12px;
+}
+
+
+.weather-status.error {
+    color: var(--danger);
+
+    font-weight: 600;
+}
+
+
+.weather-status.success {
+    color: var(--success);
+
+    font-weight: 600;
+}
+
+
+
+/* ============================================================
+   UPLOAD SECTION
+   ============================================================ */
 
 .upload-section {
     display: flex;
@@ -1086,40 +1199,40 @@ body {
 
     gap: 12px;
 
-    margin-top: 18px;
+    margin-top: 20px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border);
 }
 
 
-.upload-photo-btn {
-    background: #ffffff;
+.upload-button {
+    border: 1px solid var(--brand);
 
-    color: #27A5AD;
+    background: var(--brand);
 
-    border: 1px solid #bcdfe2;
+    color: white;
 
-    border-radius: 8px;
+    padding: 11px 16px;
 
-    padding: 10px 15px;
+    border-radius: 7px;
 
     cursor: pointer;
-
-    font-size: 13px;
 
     font-weight: 600;
 }
 
 
-.upload-photo-btn:hover {
-    background: #eefafb;
-
-    border-color: #27A5AD;
+.upload-button:hover {
+    background: var(--brand-dark);
 }
 
 
 .selected-photo-name {
-    color: #607d8b;
+    color: var(--muted);
 
-    font-size: 12px;
+    font-size: 13px;
 
     overflow: hidden;
 
@@ -1129,434 +1242,325 @@ body {
 }
 
 
-.upload-comment {
-    margin-top: 15px;
 
-    max-width: 600px;
+/* ============================================================
+   MODAL
+   ============================================================ */
 
-    padding: 15px;
-
-    background: #f8fbfb;
-
-    border: 1px solid #e0ebed;
-
-    border-radius: 9px;
-}
-
-
-.upload-comment button {
-    margin-top: 10px;
-
-    background: #27A5AD;
-
-    color: #ffffff;
-
-    border: none;
-
-    border-radius: 7px;
-
-    padding: 9px 14px;
-
-    cursor: pointer;
-
-    font-size: 12px;
-
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   FLOATING HO CHATBOT
-   ========================================================= */
-
-.ho-chatbot {
+.modal {
     position: fixed;
 
-    right: 24px;
+    inset: 0;
 
-    bottom: 22px;
+    background:
+        rgba(0, 0, 0, 0.45);
 
-    z-index: 3000;
-}
-
-
-/* =========================================================
-   CHAT BUTTON
-   ========================================================= */
-
-.ho-chat-button {
-    width: 50px;
-
-    height: 50px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #27A5AD;
-
-    color: #ffffff;
-
-    font-size: 21px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.18);
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-
-.ho-chat-button:hover {
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 9px 24px rgba(0, 0, 0, 0.22);
-}
-
-
-/* =========================================================
-   CHAT BADGE
-   ========================================================= */
-
-.ho-chat-badge {
-    position: absolute;
-
-    top: -4px;
-
-    right: -4px;
-
-    width: 21px;
-
-    height: 21px;
-
-    border-radius: 50%;
-
-    background: #e74c3c;
-
-    color: #ffffff;
+    display: none;
 
     align-items: center;
 
     justify-content: center;
 
-    font-size: 11px;
+    padding: 20px;
 
-    font-weight: 700;
-
-    border: 2px solid #ffffff;
-
-    animation: badgePulse 1.5s infinite;
+    z-index: 2000;
 }
 
 
-@keyframes badgePulse {
-
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.12);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-
-}
-
-
-/* =========================================================
-   CHAT WINDOW
-   ========================================================= */
-
-.ho-chat-window {
-    position: absolute;
-
-    right: 0;
-
-    bottom: 63px;
-
-    width: 350px;
-
-    background: #ffffff;
-
-    border: 1px solid #dfe8ea;
-
-    border-radius: 13px;
-
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.18);
-
-    overflow: hidden;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform:
-        translateY(12px)
-        scale(0.97);
-
-    transform-origin: bottom right;
-
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
-        visibility 0.2s ease;
-}
-
-
-.ho-chat-window.show {
-    opacity: 1;
-
-    visibility: visible;
-
-    transform:
-        translateY(0)
-        scale(1);
-}
-
-
-/* =========================================================
-   CHAT HEADER
-   ========================================================= */
-
-.ho-chat-header {
+.modal.show {
     display: flex;
 
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding: 13px 15px;
-
-    background: #27A5AD;
-
-    color: #ffffff;
+    animation:
+        modalFade 0.2s ease;
 }
 
 
-.ho-chat-header div {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 3px;
-}
-
-
-.ho-chat-header strong {
-    font-size: 13px;
-}
-
-
-.ho-chat-header small {
-    font-size: 10px;
-
-    opacity: 0.85;
-}
-
-
-.ho-chat-close {
-    border: none;
-
-    background: transparent;
-
-    color: #ffffff;
-
-    font-size: 22px;
-
-    line-height: 1;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   CHAT CONTENT
-   ========================================================= */
-
-.ho-chat-content {
-    padding: 14px;
-
-    max-height: 280px;
-
-    overflow-y: auto;
-}
-
-
-.ho-message {
-    background: #f2f8f9;
-
-    border: 1px solid #dcebed;
-
-    border-radius: 9px;
-
-    padding: 12px;
-}
-
-
-.ho-message-title {
-    font-size: 11px;
-
-    color: #27A5AD;
-
-    font-weight: 700;
-
-    margin-bottom: 7px;
-}
-
-
-.ho-message p {
-    font-size: 13px;
-
-    color: #455a64;
-
-    line-height: 1.5;
-}
-
-
-.ho-message-time {
-    display: block;
-
-    margin-top: 8px;
-
-    color: #90a4ae;
-
-    font-size: 10px;
-}
-
-
-/* =========================================================
-   CHAT REPLY
-   ========================================================= */
-
-.ho-reply-area {
-    display: none;
-
-    margin-top: 12px;
-}
-
-
-.ho-reply-area.show {
-    display: block;
-
-    animation: replyAppear 0.2s ease;
-}
-
-
-@keyframes replyAppear {
+@keyframes modalFade {
 
     from {
         opacity: 0;
-        transform: translateY(5px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 
 }
 
 
-.ho-reply-area textarea {
-    min-height: 65px;
+.modal-content {
+    width: 100%;
+
+    max-width: 500px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.2);
+
+    animation:
+        modalSlide 0.25s ease;
 }
 
 
-.ho-send-btn {
-    margin-top: 7px;
+@keyframes modalSlide {
 
-    background: #27A5AD;
+    from {
+        transform: translateY(15px);
 
-    color: #ffffff;
+        opacity: 0;
+    }
 
+    to {
+        transform: translateY(0);
+
+        opacity: 1;
+    }
+
+}
+
+
+.modal-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+
+.modal-header h2 {
+    font-size: 20px;
+}
+
+
+.modal-close {
     border: none;
 
-    border-radius: 7px;
+    background: transparent;
 
-    padding: 8px 13px;
+    font-size: 27px;
 
     cursor: pointer;
 
-    font-size: 12px;
+    color: var(--muted);
 }
 
 
-/* =========================================================
-   CHAT ACTIONS
-   ========================================================= */
-
-.ho-chat-actions {
-    display: flex;
-
-    gap: 8px;
-
-    padding: 11px 13px;
-
-    border-top: 1px solid #e7edef;
-
-    background: #fafcfc;
+.modal-close:hover {
+    color: var(--danger);
 }
 
 
-.ho-reply-button,
-.ho-call-button {
-    flex: 1;
+.modal-content label {
+    display: block;
 
-    padding: 9px;
-
-    border-radius: 7px;
-
-    text-align: center;
-
-    font-size: 12px;
+    font-size: 13px;
 
     font-weight: 600;
 
+    margin-bottom: 7px;
+
+    margin-top: 14px;
+}
+
+
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    padding: 10px;
+
+    font-family: inherit;
+
+    outline: none;
+}
+
+
+.modal-content select:focus,
+.modal-content textarea:focus {
+    border-color: var(--brand);
+}
+
+
+.modal-content textarea {
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+
+.modal-status {
+    min-height: 25px;
+
+    margin: 12px 0;
+
+    font-size: 13px;
+}
+
+
+.modal-status.success {
+    color: var(--success);
+
+    font-weight: 600;
+}
+
+
+
+/* ============================================================
+   CHAT
+   ============================================================ */
+
+.chat-modal {
+    max-width: 600px;
+}
+
+
+.chat-window {
+    height: 330px;
+
+    overflow-y: auto;
+
+    background: #f5f7f8;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    padding: 15px;
+
+    margin-bottom: 12px;
+}
+
+
+.chat-message {
+    max-width: 75%;
+
+    padding: 10px 12px;
+
+    margin-bottom: 12px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+}
+
+
+.chat-message strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 12px;
+}
+
+
+.chat-message p {
+    margin-bottom: 5px;
+
+    line-height: 1.45;
+}
+
+
+.chat-message span {
+    font-size: 10px;
+
+    color: var(--muted);
+}
+
+
+.chat-message.received {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    margin-right: auto;
+}
+
+
+.chat-message.sent {
+    background: var(--brand);
+
+    color: white;
+
+    margin-left: auto;
+}
+
+
+.chat-message.sent span {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+
+.chat-input-row {
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.chat-input-row input {
+    flex: 1;
+
+    padding: 11px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    outline: none;
+}
+
+
+.chat-input-row input:focus {
+    border-color: var(--brand);
+}
+
+
+.chat-input-row button {
+    border: none;
+
+    background: var(--brand);
+
+    color: white;
+
+    padding: 0 18px;
+
+    border-radius: 7px;
+
     cursor: pointer;
 
-    text-decoration: none;
+    font-weight: 600;
 }
 
 
-.ho-reply-button {
-    background: #eefafb;
-
-    color: #237f85;
-
-    border: 1px solid #cce7e9;
+.chat-input-row button:hover {
+    background: var(--brand-dark);
 }
 
 
-.ho-call-button {
-    background: #27A5AD;
 
-    color: #ffffff;
-
-    border: 1px solid #27A5AD;
-}
-
-
-/* =========================================================
+/* ============================================================
    RESPONSIVE
-   ========================================================= */
+   ============================================================ */
 
 @media (max-width: 900px) {
 
-    .summary-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+    .weather-photo-grid {
+        grid-template-columns: 1fr;
     }
 
-
-    .weather-gallery {
+    .summary-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1566,100 +1570,122 @@ body {
 @media (max-width: 700px) {
 
     .topbar {
-        height: auto;
-
-        min-height: 70px;
-
-        padding: 12px 16px;
-
-        gap: 10px;
+        padding: 0 12px;
     }
 
 
-    .page-title h1 {
-        font-size: 20px;
+    .page-title {
+        font-size: 17px;
     }
 
 
     .profile-btn {
-        font-size: 12px;
+        font-size: 0;
 
-        padding: 9px 11px;
+        width: 42px;
+        height: 42px;
+
+        justify-content: center;
+
+        padding: 0;
     }
 
 
-    .notification-btn {
-        display: none;
+    .profile-btn span {
+        font-size: 13px;
     }
 
 
-    .forecasting-container {
-        width:
-            calc(100% - 24px);
-
-        margin-top: 16px;
+    .main-content {
+        padding:
+            90px 15px 30px;
     }
 
 
-    .forecast-card {
-        padding: 17px;
+    .page-heading h1 {
+        font-size: 23px;
     }
 
 
-    .card-header {
+    .priority-alert {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+
+    .priority-button {
+        margin-left: 40px;
+    }
+
+
+    .schedule-box {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+
+    .schedule-button {
+        margin-left: 62px;
+    }
+
+
+    .contact-row {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 5px;
+    }
+
+
+    .ho-actions {
         flex-direction: column;
     }
 
 
-    .schedule-row {
+    .secondary-button {
+        width: 100%;
+    }
+
+
+    .load-table input {
+        width: 140px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .forecast-card {
+        padding: 16px;
+    }
+
+
+    .card-header {
         align-items: flex-start;
 
         flex-direction: column;
     }
 
 
-    .load-table {
-        overflow-x: auto;
+    .schedule-value {
+        font-size: 13px;
     }
 
 
-    .load-row {
-        min-width: 600px;
+    .photo-container {
+        height: 200px;
     }
 
 
-    .summary-grid {
-        grid-template-columns: 1fr;
-    }
+    .load-table th,
+    .load-table td {
+        padding: 9px;
 
-
-    .ho-chatbot {
-        right: 14px;
-
-        bottom: 14px;
-    }
-
-
-    .ho-chat-window {
-        width:
-            min(350px, calc(100vw - 28px));
-
-        right: 0;
-    }
-
-}
-
-
-@media (max-width: 450px) {
-
-    .ho-chat-window {
-        width:
-            calc(100vw - 28px);
-    }
-
-
-    .ho-chat-actions {
-        flex-direction: column;
+        font-size: 12px;
     }
 
 }
