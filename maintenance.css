@@ -215,7 +215,7 @@ body {
 
     top: 0;
 
-    left: var(--sidebar-width);
+    left: 0;
 
     right: 0;
 
@@ -389,9 +389,11 @@ body {
 
 .main-content {
 
-    margin-left: var(--sidebar-width);
+    margin-left: 0;
 
-    padding: 100px 28px 35px;
+    width: 100%;
+
+    padding: 100px 35px 35px;
 
     min-height: 100vh;
 
