@@ -6,24 +6,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // =================================================
-    // SIDEBAR
-    // =================================================
-
-    const menuBtn = document.getElementById("menuBtn");
-    const sidebar = document.getElementById("sidebar");
-
-    if (menuBtn && sidebar) {
-
-        menuBtn.addEventListener("click", function () {
-
-            sidebar.classList.toggle("active");
-
-        });
-
-    }
-
-
-    // =================================================
     // PROFILE DROPDOWN
     // =================================================
 
