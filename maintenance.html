@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Unplanned Maintenance | Solar Generation Loss Optimizer
+    </title>
+
+    <link rel="stylesheet"
+          href="maintenance.css">
+
+    <!-- Chart.js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div class="sidebar"
+     id="sidebar">
+
+    <div class="sidebar-header">
+
+        <div class="sidebar-logo">
+            S
+        </div>
+
+        <div class="sidebar-title">
+            Solar Optimizer
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a href="dashboard.html">
+            <span>⌂</span>
+            Dashboard
+        </a>
+
+        <a href="liveplant.html">
+            <span>⚡</span>
+            Live Plant
+        </a>
+
+        <a href="equipment.html">
+            <span>⚙</span>
+            Equipment Health
+        </a>
+
+        <a href="maintenance.html"
+           class="active">
+            <span>🔧</span>
+            Predictive Maintenance
+        </a>
+
+        <a href="cleaning.html">
+            <span>🧹</span>
+            Cleaning Optimisation
+        </a>
+
+        <a href="curtailment.html">
+            <span>📉</span>
+            Curtailment Analysis
+        </a>
+
+        <a href="forecasting.html">
+            <span>📊</span>
+            Forecasting
+        </a>
+
+        <a href="row.html">
+            <span>📍</span>
+            ROW Monitoring
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="login.html">
+            <span>↪</span>
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<header class="topbar">
+
+
+    <div class="topbar-left">
+
+        <button
+            id="menuBtn"
+            class="menu-btn">
+
+            ☰
+
+        </button>
+
+
+        <div class="page-title">
+
+            Unplanned Maintenance
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PROFILE -->
+
+    <div class="profile-container">
+
+        <button
+            id="profileBtn"
+            class="profile-btn">
+
+            Welcome Administrator
+
+            <span>▼</span>
+
+        </button>
+
+
+        <div
+            id="profileMenu"
+            class="profile-menu">
+
+            <a href="profile.html">
+                👤 Visit Profile
+            </a>
+
+            <a href="login.html">
+                ↪ Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         PAGE HEADER
+    ================================================== -->
+
+    <section class="page-header">
+
+        <div>
+
+            <h1>
+                Predictive & Unplanned Maintenance
+            </h1>
+
+            <p>
+                Identify equipment at risk before it causes
+                unexpected generation loss.
+            </p>
+
+        </div>
+
+
+        <div class="last-updated">
+
+            Last analysis:
+            <strong>
+                17 Aug 2026, 16:15
+            </strong>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PRIORITY NOTIFICATION
+    ================================================== -->
+
+    <section
+        class="priority-card"
+        id="priorityCard">
+
+
+        <div class="priority-icon">
+
+            ⚠
+
+        </div>
+
+
+        <div class="priority-information">
+
+
+            <div class="priority-title">
+
+                PRIORITY MAINTENANCE PREDICTION
+
+            </div>
+
+
+            <h2>
+
+                SCB12 – String 11
+
+            </h2>
+
+
+            <p>
+
+                This equipment may require unplanned
+                maintenance based on recent operating
+                patterns and historical records.
+
+            </p>
+
+
+            <div class="priority-details">
+
+
+                <div>
+
+                    <span>
+                        Risk Probability
+                    </span>
+
+                    <strong class="risk-high">
+
+                        78%
+
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Predicted Issue
+                    </span>
+
+                    <strong>
+
+                        String / SCB abnormality
+
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Prediction Window
+                    </span>
+
+                    <strong>
+
+                        Next 7 days
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="priority-actions">
+
+            <button
+                id="approveMaintenance"
+                class="approve-btn">
+
+                ✓ Approve
+
+            </button>
+
+
+            <button
+                id="declineMaintenance"
+                class="decline-btn">
+
+                ✕ Disapprove
+
+            </button>
+
+
+            <div
+                id="priorityStatus"
+                class="priority-status">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         MAIN PAGE GRID
+    ================================================== -->
+
+    <div class="maintenance-layout">
+
+
+
+        <!-- =============================================
+             LEFT MAIN AREA
+        ============================================== -->
+
+        <div class="maintenance-main">
+
+
+
+            <!-- =========================================
+                 OVERALL PROBABILITY GRAPH
+            ========================================== -->
+
+            <section class="card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Unplanned Maintenance Risk
+                        </h2>
+
+                        <p>
+                            Predictive probability across
+                            major plant equipment
+                        </p>
+
+                    </div>
+
+
+                    <span class="demo-label">
+
+                        DEMO DATA
+
+                    </span>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <canvas
+                        id="maintenanceProbabilityChart">
+                    </canvas>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================================
+                 EQUIPMENT ALERTS
+            ========================================== -->
+
+            <section class="card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Equipment-Specific Predictions
+                        </h2>
+
+                        <p>
+                            High-risk equipment identified
+                            through predictive analysis
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="prediction-grid">
+
+
+
+                    <!-- INVERTER -->
+
+                    <div class="prediction-card">
+
+                        <div class="prediction-card-header">
+
+                            <span class="equipment-icon">
+                                ⚡
+                            </span>
+
+                            <strong>
+                                Inverter
+                            </strong>
+
+                        </div>
+
+
+                        <div class="prediction-risk">
+
+                            <span>
+                                Highest Risk
+                            </span>
+
+                            <strong>
+                                Inverter 7
+                            </strong>
+
+                            <b>
+                                81%
+                            </b>
+
+                        </div>
+
+
+                        <p>
+
+                            Predictive analysis indicates
+                            increased probability of
+                            communication loss.
+
+                        </p>
+
+
+                        <div class="secondary-risk">
+
+                            Inverter 8:
+                            <strong>
+                                76%
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SOLAR MODULE -->
+
+                    <div class="prediction-card">
+
+                        <div class="prediction-card-header">
+
+                            <span class="equipment-icon">
+                                ☀
+                            </span>
+
+                            <strong>
+                                Solar Modules
+                            </strong>
+
+                        </div>
+
+
+                        <div class="prediction-risk">
+
+                            <span>
+                                Block 15
+                            </span>
+
+                            <strong>
+                                Crack Risk
+                            </strong>
+
+                            <b>
+                                74%
+                            </b>
+
+                        </div>
+
+
+                        <p>
+
+                            Higher probability of module
+                            cracks during monsoon due to
+                            stone-pelting at the site.
+
+                        </p>
+
+
+                        <div class="secondary-risk">
+
+                            Seasonal Risk:
+                            <strong>
+                                Monsoon
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SCB -->
+
+                    <div class="prediction-card">
+
+                        <div class="prediction-card-header">
+
+                            <span class="equipment-icon">
+                                ▣
+                            </span>
+
+                            <strong>
+                                SCB
+                            </strong>
+
+                        </div>
+
+
+                        <div class="prediction-risk">
+
+                            <span>
+                                Priority
+                            </span>
+
+                            <strong>
+                                SCB12
+                            </strong>
+
+                            <b>
+                                78%
+                            </b>
+
+                        </div>
+
+
+                        <p>
+
+                            SCB12 String 11 has been
+                            flagged for potential
+                            unplanned maintenance.
+
+                        </p>
+
+
+                        <div class="secondary-risk">
+
+                            Prediction:
+                            <strong>
+                                Next 7 days
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================================
+                 EQUIPMENT PIE CHARTS
+            ========================================== -->
+
+            <section class="card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Equipment Maintenance Analysis
+                        </h2>
+
+                        <p>
+                            Historical maintenance occurrence
+                            and major causes
+                        </p>
+
+                    </div>
+
+                    <span class="demo-label">
+
+                        DEMO DATA
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="pie-grid">
+
+
+
+                    <!-- INVERTER -->
+
+                    <div class="pie-card">
+
+                        <h3>
+                            Inverter
+                        </h3>
+
+                        <div class="pie-wrapper">
+
+                            <canvas
+                                id="inverterPie">
+                            </canvas>
+
+                        </div>
+
+                        <p>
+                            Maintenance causes
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- HT PANEL -->
+
+                    <div class="pie-card">
+
+                        <h3>
+                            HT Panel
+                        </h3>
+
+                        <div class="pie-wrapper">
+
+                            <canvas
+                                id="htPanelPie">
+                            </canvas>
+
+                        </div>
+
+                        <p>
+                            Maintenance causes
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- ICOG -->
+
+                    <div class="pie-card">
+
+                        <h3>
+                            ICOG
+                        </h3>
+
+                        <div class="pie-wrapper">
+
+                            <canvas
+                                id="icogPie">
+                            </canvas>
+
+                        </div>
+
+                        <p>
+                            Maintenance causes
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- TRANSFORMER -->
+
+                    <div class="pie-card">
+
+                        <h3>
+                            Transformer
+                        </h3>
+
+                        <div class="pie-wrapper">
+
+                            <canvas
+                                id="transformerPie">
+                            </canvas>
+
+                        </div>
+
+                        <p>
+                            Maintenance causes
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- CABLES -->
+
+                    <div class="pie-card">
+
+                        <h3>
+                            Cables
+                        </h3>
+
+                        <div class="pie-wrapper">
+
+                            <canvas
+                                id="cablesPie">
+                            </canvas>
+
+                        </div>
+
+                        <p>
+                            Maintenance causes
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- SCB -->
+
+                    <div class="pie-card">
+
+                        <h3>
+                            SCB
+                        </h3>
+
+                        <div class="pie-wrapper">
+
+                            <canvas
+                                id="scbPie">
+                            </canvas>
+
+                        </div>
+
+                        <p>
+                            Maintenance causes
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- SOLAR MODULES -->
+
+                    <div class="pie-card">
+
+                        <h3>
+                            Solar Modules
+                        </h3>
+
+                        <div class="pie-wrapper">
+
+                            <canvas
+                                id="modulesPie">
+                            </canvas>
+
+                        </div>
+
+                        <p>
+                            Maintenance causes
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================================
+                 UNPLANNED TESTING
+            ========================================== -->
+
+            <section class="card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Unplanned Testing
+                        </h2>
+
+                        <p>
+                            Historical unplanned testing
+                            activities
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Equipment
+                                </th>
+
+                                <th>
+                                    Test
+                                </th>
+
+                                <th>
+                                    Reason
+                                </th>
+
+                                <th>
+                                    Duration
+                                </th>
+
+                                <th>
+                                    Generation Impact
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+                                    15 Aug 2026
+                                </td>
+
+                                <td>
+                                    Inverter 8
+                                </td>
+
+                                <td>
+                                    Communication Test
+                                </td>
+
+                                <td>
+                                    Intermittent communication
+                                </td>
+
+                                <td>
+                                    35 min
+                                </td>
+
+                                <td>
+                                    18 MWh
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    13 Aug 2026
+                                </td>
+
+                                <td>
+                                    SCB12
+                                </td>
+
+                                <td>
+                                    String Test
+                                </td>
+
+                                <td>
+                                    Abnormal string current
+                                </td>
+
+                                <td>
+                                    42 min
+                                </td>
+
+                                <td>
+                                    11 MWh
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    10 Aug 2026
+                                </td>
+
+                                <td>
+                                    HT Panel 4
+                                </td>
+
+                                <td>
+                                    Relay Test
+                                </td>
+
+                                <td>
+                                    Protection alarm
+                                </td>
+
+                                <td>
+                                    25 min
+                                </td>
+
+                                <td>
+                                    7 MWh
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    08 Aug 2026
+                                </td>
+
+                                <td>
+                                    Transformer 1
+                                </td>
+
+                                <td>
+                                    Temperature Check
+                                </td>
+
+                                <td>
+                                    Temperature deviation
+                                </td>
+
+                                <td>
+                                    30 min
+                                </td>
+
+                                <td>
+                                    14 MWh
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+
+        </div>
+
+
+
+        <!-- =============================================
+             RIGHT ADMIN LOG
+        ============================================== -->
+
+        <aside class="admin-panel">
+
+
+            <div class="admin-panel-header">
+
+                <span>
+                    ADMIN
+                </span>
+
+                <h2>
+                    Unplanned Maintenance Log
+                </h2>
+
+                <p>
+                    Previous 7 days
+                </p>
+
+            </div>
+
+
+
+            <!-- ADD LOG FORM -->
+
+            <div class="admin-form">
+
+
+                <label>
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="maintenanceDate">
+
+
+
+                <label>
+                    Equipment
+                </label>
+
+                <select
+                    id="maintenanceEquipment">
+
+                    <option value="">
+                        Select Equipment
+                    </option>
+
+                    <option>
+                        Inverter
+                    </option>
+
+                    <option>
+                        HT Panel
+                    </option>
+
+                    <option>
+                        ICOG
+                    </option>
+
+                    <option>
+                        Transformer
+                    </option>
+
+                    <option>
+                        Cables
+                    </option>
+
+                    <option>
+                        SCB
+                    </option>
+
+                    <option>
+                        Solar Modules
+                    </option>
+
+                    <option>
+                        Other
+                    </option>
+
+                </select>
+
+
+
+                <label>
+                    Issue
+                </label>
+
+                <input
+                    type="text"
+                    id="maintenanceIssue"
+                    placeholder="Describe issue">
+
+
+
+                <label>
+                    Action Taken
+                </label>
+
+                <input
+                    type="text"
+                    id="maintenanceAction"
+                    placeholder="Action taken">
+
+
+
+                <label>
+                    Generation Loss
+                </label>
+
+                <input
+                    type="number"
+                    id="maintenanceLoss"
+                    placeholder="MWh"
+                    min="0"
+                    step="0.01">
+
+
+
+                <button
+                    id="addMaintenanceLog"
+                    class="admin-add-btn">
+
+                    + Add Log
+
+                </button>
+
+
+                <div
+                    id="adminLogStatus"
+                    class="admin-log-status">
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LOG TABLE -->
+
+            <div class="admin-log-table-wrapper">
+
+                <h3>
+                    Recent Logs
+                </h3>
+
+
+                <table
+                    id="adminLogTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Equipment
+                            </th>
+
+                            <th>
+                                Loss
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                16 Aug
+                            </td>
+
+                            <td>
+                                SCB
+                            </td>
+
+                            <td>
+                                9 MWh
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                15 Aug
+                            </td>
+
+                            <td>
+                                Inverter 8
+                            </td>
+
+                            <td>
+                                18 MWh
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                13 Aug
+                            </td>
+
+                            <td>
+                                HT Panel
+                            </td>
+
+                            <td>
+                                7 MWh
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                11 Aug
+                            </td>
+
+                            <td>
+                                Cable
+                            </td>
+
+                            <td>
+                                5 MWh
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </aside>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="maintenance.js"></script>
+
+
+</body>
+
+</html>
