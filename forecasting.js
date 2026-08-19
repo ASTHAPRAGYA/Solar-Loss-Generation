@@ -17,70 +17,42 @@ document.addEventListener("DOMContentLoaded", function () {
     const SCHEDULED_CURTAILMENT = 241.21;
 
 
-    // =====================================================
-    // SIDEBAR
-    // =====================================================
+     // ===========================
+    // Sidebar
+    // ===========================
 
-    const menuBtn =
-        document.getElementById("menuBtn");
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
 
-    const sidebar =
-        document.getElementById("sidebar");
+    menuBtn.addEventListener("click",()=>{
 
+        sidebar.classList.toggle("active");
 
-    if (menuBtn && sidebar) {
+    });
 
-        menuBtn.addEventListener("click", function (event) {
+    // ===========================
+    // Profile Dropdown
+    // ===========================
 
-            event.stopPropagation();
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
 
-            sidebar.classList.toggle("active");
+    profileBtn.addEventListener("click",(e)=>{
 
-        });
+        e.stopPropagation();
 
-    }
+        profileMenu.style.display =
+        profileMenu.style.display==="block"
+        ? "none"
+        : "block";
 
+    });
 
-    // =====================================================
-    // PROFILE DROPDOWN
-    // =====================================================
+    document.addEventListener("click",()=>{
 
-    const profileBtn =
-        document.getElementById("profileBtn");
+        profileMenu.style.display="none";
 
-    const profileMenu =
-        document.getElementById("profileMenu");
-
-
-    if (profileBtn && profileMenu) {
-
-        profileBtn.addEventListener("click", function (event) {
-
-            event.stopPropagation();
-
-            if (
-                profileMenu.style.display === "block"
-            ) {
-
-                profileMenu.style.display = "none";
-
-            } else {
-
-                profileMenu.style.display = "block";
-
-            }
-
-        });
-
-
-        document.addEventListener("click", function () {
-
-            profileMenu.style.display = "none";
-
-        });
-
-    }
-
+    });
 
     // =====================================================
     // PRIORITY NOTIFICATION
