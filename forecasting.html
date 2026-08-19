@@ -8,10 +8,21 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Forecasting </title>
+    <title>Forecasting</title>
 
-    <link rel="stylesheet"
-          href="forecasting.css">
+    <!-- SAME COMMON CSS AS DASHBOARD -->
+    <link rel="stylesheet" href="dashboard.css">
+
+    <!-- FORECASTING PAGE CSS -->
+    <link rel="stylesheet" href="forecasting.css">
+
+    <!-- SAME FONT AS DASHBOARD -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- FONT AWESOME - REQUIRED FOR MENU/SIDEBAR ICONS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          rel="stylesheet">
 
 </head>
 
@@ -22,17 +33,21 @@
 <!-- =====================================================
      TOP HEADER
 ===================================================== -->
+
 <header class="topbar">
 
     <div class="left-section">
 
         <button id="menuBtn">
+
             <i class="fas fa-bars"></i>
+
         </button>
 
         <h2>Forecasting</h2>
 
     </div>
+
 
     <div class="right-section">
 
@@ -46,11 +61,16 @@
 
             </button>
 
+
             <div class="profile-menu" id="profileMenu">
 
-                <a href="#">Visit Profile</a>
+                <a href="#">
+                    Visit Profile
+                </a>
 
-                <a href="index.html">Logout</a>
+                <a href="index.html">
+                    Logout
+                </a>
 
             </div>
 
@@ -60,38 +80,64 @@
 
 </header>
 
-<!-- ================= SIDEBAR ================= -->
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
 <nav id="sidebar">
 
     <h3>MENU</h3>
 
+
     <a href="dashboard.html">
+
         <i class="fas fa-home"></i>
-        Dashboard
+
+        <span>Dashboard</span>
+
     </a>
+
 
     <a href="forecasting.html">
+
         <i class="fas fa-cloud-sun"></i>
-        Forecasting
+
+        <span>Forecasting</span>
+
     </a>
+
 
     <a href="maintenance.html">
+
         <i class="fas fa-tools"></i>
-        Unplanned Maintenance
+
+        <span>Unplanned Maintenance</span>
+
     </a>
+
 
     <a href="row.html">
+
         <i class="fas fa-map-marked-alt"></i>
-        ROW
+
+        <span>ROW</span>
+
     </a>
 
+
     <a href="cleaning.html">
+
         <i class="fas fa-broom"></i>
-        Plant Cleaning Optimisation
+
+        <span>Plant Cleaning Optimisation</span>
+
     </a>
 
 </nav>
+
+
 
 <!-- =====================================================
      MAIN CONTENT
@@ -137,28 +183,36 @@
 
     </section>
 
-<div
-    class="curtailment-alarm"
-    id="curtailmentAlarm">
 
-    <div class="alarm-icon">
-        ⚠
+
+    <!-- =================================================
+         CURTAILMENT ALARM
+    ================================================== -->
+
+    <div
+        class="curtailment-alarm"
+        id="curtailmentAlarm">
+
+        <div class="alarm-icon">
+            ⚠
+        </div>
+
+        <div class="alarm-content">
+
+            <strong>
+                Curtailment Limit Exceeded
+            </strong>
+
+            <p id="alarmMessage">
+                Solar + Wind load exceeds the scheduled
+                curtailment limit.
+            </p>
+
+        </div>
+
     </div>
 
-    <div class="alarm-content">
 
-        <strong>
-            Curtailment Limit Exceeded
-        </strong>
-
-        <p id="alarmMessage">
-            Solar + Wind load exceeds the scheduled
-            curtailment limit.
-        </p>
-
-    </div>
-
-</div>
 
     <!-- =================================================
          TRAS DOWN SCHEDULE
@@ -192,15 +246,15 @@
 
         <!-- TRAS STATUS -->
 
-       <div class="tras-status">
+        <div class="tras-status">
 
-    <span class="status-dot"></span>
+            <span class="status-dot"></span>
 
-    <strong>
-        TRAS Down active — check AS schedule in WBES
-    </strong>
+            <strong>
+                TRAS Down active — check AS schedule in WBES
+            </strong>
 
-</div>
+        </div>
 
 
 
@@ -208,15 +262,11 @@
 
         <div class="tras-schedule">
 
-
             <div class="schedule-title">
-
-                <!-- Excel-style icon -->
 
                 <span class="excel-icon">
                     X
                 </span>
-
 
                 <span>
                     TRAS Down Total Schedule
@@ -227,11 +277,13 @@
 
             <div class="schedule-value">
 
-    After TRAS Down Total Schedule for
-    <strong>13:45 - 14:00 = 241.21 MW</strong>
+                After TRAS Down Total Schedule for
 
-</div>
+                <strong>
+                    13:45 - 14:00 = 241.21 MW
+                </strong>
 
+            </div>
 
         </div>
 
@@ -344,13 +396,13 @@
 
                         <td>
 
-                           <input
-    type="number"
-    id="solarLoad"
-    placeholder="Max 191.40 MW"
-    min="0"
-    max="191.4"
-    step="0.01">
+                            <input
+                                type="number"
+                                id="solarLoad"
+                                placeholder="Max 191.40 MW"
+                                min="0"
+                                max="191.4"
+                                step="0.01">
 
                         </td>
 
@@ -358,12 +410,12 @@
                         <td>
 
                             <input
-    type="number"
-    id="windLoad"
-    placeholder="Max 204.75 MW"
-    min="0"
-    max="204.75"
-    step="0.01">
+                                type="number"
+                                id="windLoad"
+                                placeholder="Max 204.75 MW"
+                                min="0"
+                                max="204.75"
+                                step="0.01">
 
                         </td>
 
@@ -435,23 +487,14 @@
         <div class="weather-grid">
 
 
-
-            <!-- =========================================
-                 13:15 - 13:30
-            ========================================== -->
+            <!-- 13:15 - 13:30 -->
 
             <div class="weather-report-card">
 
-
                 <div class="weather-time">
-
                     13:15 - 13:30
-
                 </div>
 
-
-
-                <!-- Uploaded Site Photo -->
 
                 <img
                     src="weather-site-1315.jpg"
@@ -459,34 +502,21 @@
                     alt="Site weather photograph for 13:15 to 13:30">
 
 
-
                 <div class="photo-label">
-
                     Site Weather Photograph
-
                 </div>
 
 
-
-                <!-- Comment -->
-
-                <label
-                    for="comment1315">
-
+                <label for="comment1315">
                     Comments
-
                 </label>
 
 
                 <textarea
                     id="comment1315"
                     class="weather-comment"
-                    placeholder="Enter observations about weather conditions at site...">
-                </textarea>
+                    placeholder="Enter observations about weather conditions at site..."></textarea>
 
-
-
-                <!-- Send -->
 
                 <button
                     class="send-weather-btn"
@@ -502,27 +532,18 @@
                     class="weather-status">
                 </div>
 
-
             </div>
 
 
 
-            <!-- =========================================
-                 13:00 - 13:15
-            ========================================== -->
+            <!-- 13:00 - 13:15 -->
 
             <div class="weather-report-card">
 
-
                 <div class="weather-time">
-
                     13:00 - 13:15
-
                 </div>
 
-
-
-                <!-- Empty Photo Slot -->
 
                 <div
                     class="photo-placeholder"
@@ -539,26 +560,16 @@
                 </div>
 
 
-
-                <!-- Comment -->
-
-                <label
-                    for="comment1300">
-
+                <label for="comment1300">
                     Comments
-
                 </label>
 
 
                 <textarea
                     id="comment1300"
                     class="weather-comment"
-                    placeholder="Enter observations about weather conditions at site...">
-                </textarea>
+                    placeholder="Enter observations about weather conditions at site..."></textarea>
 
-
-
-                <!-- Send -->
 
                 <button
                     class="send-weather-btn"
@@ -574,7 +585,6 @@
                     class="weather-status">
                 </div>
 
-
             </div>
 
 
@@ -582,12 +592,9 @@
 
 
 
-        <!-- =========================================
-             UPLOAD NEW PHOTO
-        ========================================== -->
+        <!-- UPLOAD NEW PHOTO -->
 
         <div class="upload-photo-area">
-
 
             <button
                 class="upload-photo-btn"
@@ -609,7 +616,6 @@
                 id="selectedPhotoName"
                 class="selected-photo-name">
             </p>
-
 
         </div>
 
@@ -651,7 +657,7 @@
                 </span>
 
                 <strong>
-                    241 MW
+                    241.21 MW
                 </strong>
 
             </div>
@@ -701,7 +707,6 @@
     </section>
 
 
-
 </main>
 
 
@@ -714,9 +719,7 @@
     class="modal-overlay"
     id="tagModal">
 
-
     <div class="modal">
-
 
         <button
             class="modal-close"
@@ -761,8 +764,7 @@
 
         <textarea
             id="hoMessage"
-            placeholder="Enter your message...">
-        </textarea>
+            placeholder="Enter your message..."></textarea>
 
 
         <button
@@ -779,7 +781,6 @@
             class="form-status">
         </div>
 
-
     </div>
 
 </div>
@@ -794,9 +795,7 @@
     class="modal-overlay"
     id="chatModal">
 
-
     <div class="modal">
-
 
         <button
             class="modal-close"
@@ -816,7 +815,6 @@
             class="chat-window"
             id="chatWindow">
 
-
             <div class="chat-message received">
 
                 <strong>
@@ -834,12 +832,10 @@
 
             </div>
 
-
         </div>
 
 
         <div class="chat-input-area">
-
 
             <input
                 type="text"
@@ -854,9 +850,7 @@
 
             </button>
 
-
         </div>
-
 
     </div>
 
@@ -870,7 +864,5 @@
 
 <script src="forecasting.js"></script>
 
-
 </body>
-
 </html>
