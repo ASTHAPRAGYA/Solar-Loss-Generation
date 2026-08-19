@@ -1,0 +1,651 @@
+/* =====================================================
+   SOLAR GENERATION LOSS OPTIMIZER
+   ROW MONITORING
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary: #27A5AD;
+    --primary-dark: #1d858c;
+    --text: #263238;
+    --muted: #6b7780;
+    --border: #e1e7ea;
+    --background: #f5f8f9;
+    --white: #ffffff;
+    --success: #2e9d65;
+    --warning: #d99a25;
+    --danger: #d9534f;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+}
+
+
+/* =====================================================
+   TOP BAR
+   SAME STYLE AS DASHBOARD
+===================================================== */
+
+.topbar {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 72px;
+
+    background: var(--white);
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    z-index: 1000;
+
+}
+
+
+.topbar-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-btn {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: 0.2s ease;
+
+}
+
+
+.menu-btn:hover {
+
+    background: var(--primary-dark);
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.page-title {
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    color: var(--text);
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-container {
+
+    position: relative;
+
+}
+
+
+.profile-btn {
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+}
+
+
+.profile-btn:hover {
+
+    background: #f1f5f6;
+
+}
+
+
+/* =====================================================
+   PROFILE DROPDOWN
+===================================================== */
+
+.profile-menu {
+
+    display: none;
+
+    position: absolute;
+
+    right: 0;
+
+    top: 48px;
+
+    width: 175px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.10);
+
+    overflow: hidden;
+
+}
+
+
+.profile-menu a {
+
+    display: block;
+
+    padding: 12px 15px;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+}
+
+
+.profile-menu a:hover {
+
+    background: #f2f8f9;
+
+    color: var(--primary);
+
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content {
+
+    width: 100%;
+
+    margin-left: 0;
+
+    padding: 105px 30px 40px;
+
+    min-height: 100vh;
+
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+section {
+
+    margin-bottom: 28px;
+
+}
+
+
+section h2 {
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    margin-bottom: 16px;
+
+    color: var(--text);
+
+}
+
+
+/* =====================================================
+   OVERVIEW
+===================================================== */
+
+.overview-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.overview-card {
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 22px;
+
+    min-height: 110px;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.overview-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.07);
+
+}
+
+
+.overview-card h3 {
+
+    color: var(--primary);
+
+    font-size: 26px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.overview-card p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-section {
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+}
+
+
+#searchInput {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    height: 42px;
+
+    padding: 0 14px;
+
+    border: 1px solid #ccd6da;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+
+}
+
+
+#searchInput:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(39, 165, 173, 0.12);
+
+}
+
+
+/* =====================================================
+   TABLE SECTION
+===================================================== */
+
+.table-section {
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+}
+
+
+/* =====================================================
+   TABLE CONTAINER
+===================================================== */
+
+.table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+#rowTable {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 850px;
+
+}
+
+
+#rowTable th {
+
+    background: #eef7f8;
+
+    color: #34454b;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    padding: 14px;
+
+    border-bottom: 1px solid var(--border);
+
+    white-space: nowrap;
+
+}
+
+
+#rowTable td {
+
+    padding: 14px;
+
+    font-size: 13px;
+
+    border-bottom: 1px solid #edf0f1;
+
+    color: #46545a;
+
+}
+
+
+#rowTable tbody tr {
+
+    transition: background 0.15s ease;
+
+}
+
+
+#rowTable tbody tr:hover {
+
+    background: #f6fbfb;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+#rowTable td:nth-child(5) {
+
+    font-weight: 600;
+
+}
+
+
+#rowTable td:nth-child(5)::first-letter {
+
+    color: var(--primary);
+
+}
+
+
+/* =====================================================
+   DOCUMENT BUTTON
+===================================================== */
+
+.doc-btn {
+
+    border: none;
+
+    background: var(--primary);
+
+    color: white;
+
+    padding: 7px 14px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.doc-btn:hover {
+
+    background: var(--primary-dark);
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =====================================================
+   DOCUMENT VIEWER
+===================================================== */
+
+.document-section {
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+}
+
+
+#documentViewer {
+
+    min-height: 100px;
+
+    border: 1px dashed #cbd6d9;
+
+    border-radius: 9px;
+
+    padding: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    background: #fafcfc;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .overview-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .topbar {
+
+        padding: 0 15px;
+
+    }
+
+
+    .page-title {
+
+        font-size: 18px;
+
+    }
+
+
+    .profile-btn {
+
+        font-size: 12px;
+
+    }
+
+
+    .main-content {
+
+        padding:
+            95px
+            15px
+            30px;
+
+    }
+
+
+    .overview-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .overview-card h3 {
+
+        font-size: 22px;
+
+    }
+
+}
