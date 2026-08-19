@@ -4,83 +4,42 @@
 // =====================================================
 
 document.addEventListener("DOMContentLoaded", function () {
+ // ===========================
+    // Sidebar
+    // ===========================
 
-    // =================================================
-    // PROFILE DROPDOWN
-    // =================================================
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
 
-    const profileBtn =
-        document.getElementById("profileBtn");
+    menuBtn.addEventListener("click",()=>{
 
-    const profileMenu =
-        document.getElementById("profileMenu");
+        sidebar.classList.toggle("active");
 
+    });
 
-    if (profileBtn && profileMenu) {
+    // ===========================
+    // Profile Dropdown
+    // ===========================
 
-        profileBtn.addEventListener("click", function (event) {
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
 
-            event.stopPropagation();
+    profileBtn.addEventListener("click",(e)=>{
 
-            if (profileMenu.style.display === "block") {
+        e.stopPropagation();
 
-                profileMenu.style.display = "none";
+        profileMenu.style.display =
+        profileMenu.style.display==="block"
+        ? "none"
+        : "block";
 
-            } else {
+    });
 
-                profileMenu.style.display = "block";
+    document.addEventListener("click",()=>{
 
-            }
+        profileMenu.style.display="none";
 
-        });
-
-
-        document.addEventListener("click", function () {
-
-            profileMenu.style.display = "none";
-
-        });
-
-
-        profileMenu.addEventListener("click", function (event) {
-
-            event.stopPropagation();
-
-        });
-
-    }
-
-
-    // =================================================
-    // MENU BUTTON
-    // =================================================
-    //
-    // The ROW page does not have a permanently open
-    // sidebar. The button is kept to match Dashboard.
-    //
-    // If you later want the same temporary menu as
-    // Dashboard, this section can be connected to it.
-    // =================================================
-
-    const menuBtn =
-        document.getElementById("menuBtn");
-
-
-    if (menuBtn) {
-
-        menuBtn.addEventListener("click", function () {
-
-            /*
-             * No permanent sidebar on ROW page.
-             *
-             * The menu button is intentionally kept
-             * in the top bar for consistency with
-             * dashboard.html.
-             */
-
-        });
-
-    }
+    });
 
 
     // =================================================
