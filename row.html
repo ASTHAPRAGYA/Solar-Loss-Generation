@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        ROW Monitoring | Solar Generation Loss Optimizer
+    </title>
+
+    <link rel="stylesheet" href="row.css">
+
+</head>
+
+<body>
+
+    <!-- =======================================
+         TOP BAR
+         (Same as Dashboard)
+    ======================================== -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                id="menuBtn"
+                class="menu-btn">
+
+                ☰
+
+            </button>
+
+            <h1 class="page-title">
+
+                ROW Monitoring
+
+            </h1>
+
+        </div>
+
+
+        <div class="profile-container">
+
+            <button
+                id="profileBtn"
+                class="profile-btn">
+
+                Welcome Administrator ▼
+
+            </button>
+
+
+            <div
+                id="profileMenu"
+                class="profile-menu">
+
+                <a href="#">
+                    Visit Profile
+                </a>
+
+                <a href="login.html">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =======================================
+         MAIN CONTENT
+    ======================================== -->
+
+    <main class="main-content">
+
+        <!-- ROW OVERVIEW -->
+
+        <section class="overview-section">
+
+            <h2>
+                ROW Overview
+            </h2>
+
+            <div class="overview-grid">
+
+                <div class="overview-card">
+
+                    <h3>100 Acres</h3>
+
+                    <p>Total Land Area</p>
+
+                </div>
+
+                <div class="overview-card">
+
+                    <h3>300</h3>
+
+                    <p>Total Farmers</p>
+
+                </div>
+
+                <div class="overview-card">
+
+                    <h3>180</h3>
+
+                    <p>Leased Parcels</p>
+
+                </div>
+
+                <div class="overview-card">
+
+                    <h3>120</h3>
+
+                    <p>Purchased Parcels</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEARCH -->
+
+        <section class="search-section">
+
+            <h2>
+                Search Land Records
+            </h2>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by Land No, Owner Name, Parcel Name...">
+
+        </section>
+
+
+        <!-- LAND TABLE -->
+
+        <section class="table-section">
+
+            <h2>
+                Land Register
+            </h2>
+
+            <div class="table-container">
+
+                <table id="rowTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Land No.</th>
+
+                            <th>Parcel Name</th>
+
+                            <th>Owner Name</th>
+
+                            <th>Area (Acres)</th>
+
+                            <th>Status</th>
+
+                            <th>Agreement</th>
+
+                            <th>Documents</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>ROW-001</td>
+
+                            <td>Block-01</td>
+
+                            <td>Ramesh Kumar</td>
+
+                            <td>0.35</td>
+
+                            <td>Leased</td>
+
+                            <td>Active</td>
+
+                            <td>
+                                <button class="doc-btn">
+                                    View
+                                </button>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>ROW-002</td>
+
+                            <td>Block-02</td>
+
+                            <td>Suresh Patil</td>
+
+                            <td>0.42</td>
+
+                            <td>Purchased</td>
+
+                            <td>Active</td>
+
+                            <td>
+                                <button class="doc-btn">
+                                    View
+                                </button>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>ROW-003</td>
+
+                            <td>Block-03</td>
+
+                            <td>Anand Rao</td>
+
+                            <td>0.28</td>
+
+                            <td>Leased</td>
+
+                            <td>Active</td>
+
+                            <td>
+                                <button class="doc-btn">
+                                    View
+                                </button>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>ROW-004</td>
+
+                            <td>Block-04</td>
+
+                            <td>Mahesh Gowda</td>
+
+                            <td>0.31</td>
+
+                            <td>Purchased</td>
+
+                            <td>Active</td>
+
+                            <td>
+                                <button class="doc-btn">
+                                    View
+                                </button>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>ROW-005</td>
+
+                            <td>Block-05</td>
+
+                            <td>Prakash Singh</td>
+
+                            <td>0.50</td>
+
+                            <td>Leased</td>
+
+                            <td>Renewal Due</td>
+
+                            <td>
+                                <button class="doc-btn">
+                                    View
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- DOCUMENT PREVIEW -->
+
+        <section class="document-section">
+
+            <h2>
+                Land Documents
+            </h2>
+
+            <div id="documentViewer">
+
+                Select a land parcel and click
+                <strong>View</strong>
+                to see uploaded documents.
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="row.js"></script>
+
+</body>
+
+</html>
