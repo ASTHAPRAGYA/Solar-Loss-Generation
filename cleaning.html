@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Plant Cleaning Optimisation</title>
+
+    <!-- Poppins -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="cleaning.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<header class="topbar">
+
+    <div class="left-section">
+
+        <button id="menuBtn">
+
+            <i class="fas fa-bars"></i>
+
+        </button>
+
+        <h2>
+            Plant Cleaning Optimisation
+        </h2>
+
+    </div>
+
+
+    <div class="right-section">
+
+        <div class="profile">
+
+            <button id="profileBtn">
+
+                Welcome Administrator
+
+                <i class="fas fa-chevron-down"></i>
+
+            </button>
+
+
+            <div class="profile-menu"
+                 id="profileMenu">
+
+                <a href="#">
+                    Visit Profile
+                </a>
+
+                <a href="index.html">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<nav id="sidebar">
+
+    <h3>MENU</h3>
+
+
+    <a href="dashboard.html">
+
+        <i class="fas fa-home"></i>
+
+        <span>
+            Dashboard
+        </span>
+
+    </a>
+
+
+    <a href="forecasting.html">
+
+        <i class="fas fa-cloud-sun"></i>
+
+        <span>
+            Forecasting
+        </span>
+
+    </a>
+
+
+    <a href="maintenance.html">
+
+        <i class="fas fa-tools"></i>
+
+        <span>
+            Unplanned Maintenance
+        </span>
+
+    </a>
+
+
+    <a href="row.html">
+
+        <i class="fas fa-map-marked-alt"></i>
+
+        <span>
+            ROW
+        </span>
+
+    </a>
+
+
+    <a href="cleaning.html"
+       class="active">
+
+        <i class="fas fa-broom"></i>
+
+        <span>
+            Plant Cleaning Optimisation
+        </span>
+
+    </a>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         PAGE HEADER
+    ================================================== -->
+
+    <section class="page-header">
+
+        <div>
+
+            <h1>
+                Plant Cleaning Optimisation
+            </h1>
+
+            <p>
+                Manage module cleaning and grass cutting
+                based on plant generation and cleaning schedules.
+            </p>
+
+        </div>
+
+
+        <div class="last-updated">
+
+            Forecasting Status:
+            <strong id="forecastStatus">
+                Checking...
+            </strong>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FORECASTING INTERLOCK ALERT
+    ================================================== -->
+
+    <section
+        class="generation-alert"
+        id="generationAlert">
+
+        <div class="generation-alert-icon">
+
+            <i class="fas fa-solar-panel"></i>
+
+        </div>
+
+
+        <div class="generation-alert-content">
+
+            <div class="alert-label">
+                CLEANING ACTIVITY RESTRICTION
+            </div>
+
+            <h2 id="generationAlertTitle">
+                Cleaning cannot be processed currently
+            </h2>
+
+            <p id="generationAlertMessage">
+                Solar generation is currently above zero.
+                Cleaning activities must be carried out
+                only when generation is zero.
+            </p>
+
+            <div class="alert-details">
+
+                <span>
+                    Current Solar Generation:
+                </span>
+
+                <strong id="currentSolarGeneration">
+                    0.00 MW
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CONTACT RESPONSIBLE PERSON
+    ================================================== -->
+
+    <section class="contact-card">
+
+        <div class="contact-icon">
+
+            <i class="fas fa-user-hard-hat"></i>
+
+        </div>
+
+
+        <div class="contact-information">
+
+            <span class="contact-label">
+                PLANT CLEANING RESPONSIBLE PERSON
+            </span>
+
+            <h2>
+                Mr. Sidduppa Bohvi
+            </h2>
+
+            <p>
+                Responsible for coordinating module cleaning
+                and grass cutting activities at site.
+            </p>
+
+            <div class="contact-timing">
+
+                <i class="fas fa-clock"></i>
+
+                <span>
+                    Permitted cleaning window:
+                    <strong>
+                        Before 06:00 AM or after 06:00 PM
+                    </strong>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="contact-actions">
+
+            <a
+                href="tel:9958317105"
+                class="call-btn">
+
+                <i class="fas fa-phone"></i>
+
+                Call Responsible Person
+
+            </a>
+
+
+            <span class="contact-number">
+
+                9958317105
+
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CLEANING SUMMARY
+    ================================================== -->
+
+    <section class="summary-grid">
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+
+                <i class="fas fa-calendar-check"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    CLEANING DUE
+                </span>
+
+                <strong id="totalDue">
+                    0
+                </strong>
+
+                <small>
+                    Activities
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+
+                <i class="fas fa-water"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    MODULE CLEANING
+                </span>
+
+                <strong id="moduleDue">
+                    0
+                </strong>
+
+                <small>
+                    Blocks due
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+
+                <i class="fas fa-leaf"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    GRASS CUTTING
+                </span>
+
+                <strong id="grassDue">
+                    0
+                </strong>
+
+                <small>
+                    Blocks due
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+
+                <i class="fas fa-check-circle"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    COMPLETED
+                </span>
+
+                <strong id="completedCount">
+                    0
+                </strong>
+
+                <small>
+                    Activities
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CLEANING SCHEDULE
+    ================================================== -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Cleaning Schedule
+                </h2>
+
+                <p>
+                    Block-wise cleaning requirements and
+                    current processing status.
+                </p>
+
+            </div>
+
+
+            <span class="schedule-note">
+
+                <i class="fas fa-info-circle"></i>
+
+                Generation-linked
+
+            </span>
+
+        </div>
+
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Block
+                        </th>
+
+                        <th>
+                            Activity
+                        </th>
+
+                        <th>
+                            Due Date
+                        </th>
+
+                        <th>
+                            Reason
+                        </th>
+
+                        <th>
+                            Current Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="cleaningTableBody">
+
+                    <!-- Javascript generates rows -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CLEANING RULES
+    ================================================== -->
+
+    <section class="rules-grid">
+
+
+        <div class="rule-card">
+
+            <div class="rule-icon">
+
+                <i class="fas fa-sun"></i>
+
+            </div>
+
+            <h3>
+                Generation Condition
+            </h3>
+
+            <p>
+                Cleaning activity can only be processed
+                when solar generation is
+                <strong>0 MW</strong>.
+            </p>
+
+        </div>
+
+
+
+        <div class="rule-card">
+
+            <div class="rule-icon">
+
+                <i class="fas fa-clock"></i>
+
+            </div>
+
+            <h3>
+                Permitted Timings
+            </h3>
+
+            <p>
+                Module cleaning and grass cutting are
+                permitted only <strong>before 06:00 AM
+                or after 06:00 PM</strong>.
+            </p>
+
+        </div>
+
+
+
+        <div class="rule-card">
+
+            <div class="rule-icon">
+
+                <i class="fas fa-link"></i>
+
+            </div>
+
+            <h3>
+                Forecasting Integration
+            </h3>
+
+            <p>
+                Cleaning restrictions automatically use
+                the solar generation information entered
+                in the Forecasting tab.
+            </p>
+
+        </div>
+
+
+
+        <div class="rule-card">
+
+            <div class="rule-icon">
+
+                <i class="fas fa-phone"></i>
+
+            </div>
+
+            <h3>
+                Site Coordination
+            </h3>
+
+            <p>
+                HO or site personnel can directly contact
+                the responsible person for cleaning
+                coordination.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACTIVITY HISTORY
+    ================================================== -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Recent Cleaning Activities
+                </h2>
+
+                <p>
+                    Record of recently completed cleaning
+                    and grass cutting activities.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Block
+                        </th>
+
+                        <th>
+                            Activity
+                        </th>
+
+                        <th>
+                            Responsible Person
+                        </th>
+
+                        <th>
+                            Generation
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="activityHistory">
+
+                    <tr>
+
+                        <td>
+                            17 Aug 2026
+                        </td>
+
+                        <td>
+                            Block 12
+                        </td>
+
+                        <td>
+                            Module Cleaning
+                        </td>
+
+                        <td>
+                            Sidduppa Bohvi
+                        </td>
+
+                        <td>
+                            0.00 MW
+                        </td>
+
+                        <td>
+                            <span class="status-completed">
+                                Completed
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            16 Aug 2026
+                        </td>
+
+                        <td>
+                            Block 8
+                        </td>
+
+                        <td>
+                            Grass Cutting
+                        </td>
+
+                        <td>
+                            Sidduppa Bohvi
+                        </td>
+
+                        <td>
+                            0.00 MW
+                        </td>
+
+                        <td>
+                            <span class="status-completed">
+                                Completed
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            15 Aug 2026
+                        </td>
+
+                        <td>
+                            Block 15
+                        </td>
+
+                        <td>
+                            Module Cleaning
+                        </td>
+
+                        <td>
+                            Sidduppa Bohvi
+                        </td>
+
+                        <td>
+                            0.00 MW
+                        </td>
+
+                        <td>
+                            <span class="status-completed">
+                                Completed
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+</main>
+
+
+
+<script src="cleaning.js"></script>
+
+</body>
+
+</html>
