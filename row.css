@@ -649,3 +649,140 @@ section h2 {
     }
 
 }
+/* =====================================================
+   SELECTED LAND
+===================================================== */
+
+.selected-row {
+
+    background: #eefafb !important;
+
+}
+
+
+.document-details {
+
+    width: 100%;
+
+    text-align: left;
+
+}
+
+
+.document-details h3 {
+
+    color: #27A5AD;
+
+    margin-bottom: 15px;
+
+    font-size: 18px;
+
+}
+
+
+.document-info {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.document-info p {
+
+    font-size: 12px;
+
+    color: #59666d;
+
+}
+
+
+.document-details h4 {
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.document-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.document-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #e1e7ea;
+
+    border-radius: 7px;
+
+    background: white;
+
+}
+
+
+.document-item span:nth-child(2) {
+
+    flex: 1;
+
+    font-size: 12px;
+
+}
+
+
+.document-open-btn {
+
+    border: none;
+
+    background: #27A5AD;
+
+    color: white;
+
+    border-radius: 5px;
+
+    padding: 5px 10px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+}
+
+
+.document-open-btn:hover {
+
+    background: #1d858c;
+
+}
+
+
+@media (max-width: 700px) {
+
+    .document-info {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
