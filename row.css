@@ -206,68 +206,95 @@ body{
     transform:scale(0.97);
 
 }
-/* ===========================
-        SIDEBAR
-=========================== */
+/* =====================================================
+   SIDEBAR
+===================================================== */
 
 #sidebar{
-
     position:fixed;
-
     top:70px;
-
     left:-260px;
-
     width:250px;
+    height:calc(100vh - 70px);
 
-    height:100%;
+    background:#ffffff;
 
-    background:white;
+    box-shadow:5px 0 20px rgba(0,0,0,.10);
 
-    box-shadow:5px 0 20px rgba(0,0,0,.1);
-
-    transition:.4s;
+    transition:left .4s ease;
 
     padding-top:20px;
 
-    z-index:999;
-
+    z-index:998;
 }
 
 #sidebar.active{
-
     left:0;
-
 }
+
+/* MENU TITLE */
 
 #sidebar h3{
-
     padding:20px;
-
     color:#27A5AD;
-
+    font-size:16px;
+    font-weight:600;
 }
 
+/* SIDEBAR LINKS */
+
 #sidebar a{
+    display:flex;
+    align-items:center;
 
-    display:block;
+    gap:14px;
 
-    padding:18px 25px;
+    padding:16px 25px;
 
     color:#444;
 
     text-decoration:none;
 
-    transition:.3s;
-
+    transition:
+        background .25s ease,
+        color .25s ease;
 }
 
+/* SIDEBAR ICONS */
+
+#sidebar a i{
+    width:22px;
+    min-width:22px;
+
+    text-align:center;
+
+    color:#27A5AD;
+
+    font-size:16px;
+
+    transition:color .25s ease;
+}
+
+/* HOVER */
+
 #sidebar a:hover{
-
     background:#27A5AD;
+    color:#ffffff;
+}
 
-    color:white;
+#sidebar a:hover i{
+    color:#ffffff;
+}
 
+/* ACTIVE PAGE */
+
+#sidebar a.active{
+    background:#27A5AD;
+    color:#ffffff;
+}
+
+#sidebar a.active i{
+    color:#ffffff;
 }
 /* =====================================================
    PAGE TITLE
