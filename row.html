@@ -9,7 +9,7 @@
           content="width=device-width, initial-scale=1.0">
 
     <title>
-        ROW Monitoring | Solar Generation Loss Optimizer
+        ROW Monitoring
     </title>
 
     <link rel="stylesheet" href="row.css">
@@ -20,59 +20,78 @@
 
     <!-- =======================================
          TOP BAR
-         (Same as Dashboard)
+    
     ======================================== -->
+<header class="topbar">
 
-    <header class="topbar">
+    <div class="left-section">
 
-        <div class="topbar-left">
+        <button id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
 
-            <button
-                id="menuBtn"
-                class="menu-btn">
+        <h2>ROW Monitoring</h2>
 
-                ☰
+    </div>
 
-            </button>
+    <div class="right-section">
 
-            <h1 class="page-title">
+        <div class="profile">
 
-                ROW Monitoring
+            <button id="profileBtn">
 
-            </h1>
+                Welcome Administrator
 
-        </div>
-
-
-        <div class="profile-container">
-
-            <button
-                id="profileBtn"
-                class="profile-btn">
-
-                Welcome Administrator ▼
+                <i class="fas fa-chevron-down"></i>
 
             </button>
 
+            <div class="profile-menu" id="profileMenu">
 
-            <div
-                id="profileMenu"
-                class="profile-menu">
+                <a href="#">Visit Profile</a>
 
-                <a href="#">
-                    Visit Profile
-                </a>
-
-                <a href="login.html">
-                    Logout
-                </a>
+                <a href="index.html">Logout</a>
 
             </div>
 
         </div>
 
-    </header>
+    </div>
 
+</header>
+
+<!-- ================= SIDEBAR ================= -->
+
+<nav id="sidebar">
+
+    <h3>MENU</h3>
+
+    <a href="dashboard.html">
+        <i class="fas fa-home"></i>
+        Dashboard
+    </a>
+
+    <a href="forecasting.html">
+        <i class="fas fa-cloud-sun"></i>
+        Forecasting
+    </a>
+
+    <a href="maintenance.html">
+        <i class="fas fa-tools"></i>
+        Unplanned Maintenance
+    </a>
+
+    <a href="row.html">
+        <i class="fas fa-map-marked-alt"></i>
+        ROW
+    </a>
+
+    <a href="cleaning.html">
+        <i class="fas fa-broom"></i>
+        Plant Cleaning Optimisation
+    </a>
+
+</nav>
 
     <!-- =======================================
          MAIN CONTENT
