@@ -4,47 +4,43 @@
 // =====================================================
 
 document.addEventListener("DOMContentLoaded", function () {
+ // ===========================
+    // Sidebar
+    // ===========================
 
-    // =================================================
-    // PROFILE DROPDOWN
-    // =================================================
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
+
+    menuBtn.addEventListener("click",()=>{
+
+        sidebar.classList.toggle("active");
+
+    });
+
+    // ===========================
+    // Profile Dropdown
+    // ===========================
 
     const profileBtn = document.getElementById("profileBtn");
     const profileMenu = document.getElementById("profileMenu");
 
-    if (profileBtn && profileMenu) {
+    profileBtn.addEventListener("click",(e)=>{
 
-        profileBtn.addEventListener("click", function (event) {
+        e.stopPropagation();
 
-            event.stopPropagation();
+        profileMenu.style.display =
+        profileMenu.style.display==="block"
+        ? "none"
+        : "block";
 
-            if (profileMenu.style.display === "block") {
+    });
 
-                profileMenu.style.display = "none";
+    document.addEventListener("click",()=>{
 
-            } else {
+        profileMenu.style.display="none";
 
-                profileMenu.style.display = "block";
+    });
 
-            }
-
-        });
-
-
-        document.addEventListener("click", function () {
-
-            profileMenu.style.display = "none";
-
-        });
-
-
-        profileMenu.addEventListener("click", function (event) {
-
-            event.stopPropagation();
-
-        });
-
-    }
 
 
     // =================================================
